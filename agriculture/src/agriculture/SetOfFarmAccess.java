@@ -12,14 +12,14 @@ import java.util.Collection;
  *
  * @author user
  */
-public class SetOfFarmAccess extends ArrayList<User> {
+public class SetOfFarmAccess extends ArrayList<FarmAccess> {
    
     public SetOfFarmAccess()
     {
         super();
     }
     
-    public SetOfFarmAccess(Collection<? extends User> c)
+    public SetOfFarmAccess(Collection<? extends FarmAccess> c)
     {
         super(c);
     }
@@ -29,18 +29,18 @@ public class SetOfFarmAccess extends ArrayList<User> {
         super.add(farmAccess);
     }
     
-    public void removeUser(FarmAccess farmAccess)
+    public void removeFarmAccess(FarmAccess farmAccess)
     {
         super.remove(farmAccess);
     }
     
-    public FarmAccess getByFarm(Farm farm)
+    public FarmAccess getFarmAccessByFarm(Farm farm)
     {
         FarmAccess result = null;
         
         for (FarmAccess tmp: this)
         {
-            if (tmp.getUsername().equals(username))
+            if (tmp.getFarm() == farm)
             {
                 result = tmp;
                 break;

@@ -18,7 +18,15 @@ public class FarmAccess {
         this.accessLevel = accessLevel;
     }
     
-    public void changeAccessLevel(AccessLevel accessLevel) {
+    public void setAccessLevel(AccessLevel accessLevel) {
         this.accessLevel = accessLevel;
+    }
+    
+    public Farm getFarm() {
+        return farm;
+    }
+    
+    public AccessLevel getAccessLevel() {
+        return accessLevel;
     }
 }
