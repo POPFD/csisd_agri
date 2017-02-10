@@ -13,7 +13,7 @@ public class BarometricDataHandler extends DataHandlerMethod{
     
     private Reading previousReading;
     
-    public Reading handleRawData(){
+    public Reading handleRawData(Reading rawReading){
         
         return 0;
         

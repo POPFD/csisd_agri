@@ -11,7 +11,7 @@ package agriculture;
  */
 public class DataHandlerMethod {
     
-    public Reading handleRawData(){
+    public Reading handleRawData(Reading rawReading){
         
         return 0;
         
