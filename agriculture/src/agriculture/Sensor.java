@@ -41,7 +41,8 @@ public class Sensor {
     {
         Date currDT = new Date();
         
-        /* Need to figure out what tmpObj is!!?!? */
+        //TODO: Need to figure out what tmpObj is!!?!?
+        Object tmpObj = new Object();
         
         rawReading = new Reading(currDT, tmpObj, sensorLoction);
         processedReading = handlerMethod(rawReading);
