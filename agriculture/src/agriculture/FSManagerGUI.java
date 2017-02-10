@@ -10,9 +10,9 @@ package agriculture;
  * @author sambowenhughes
  */
 public class FSManagerGUI {
-    User currentUser = new User();
-    Permissions currentUserPermissions = new Permissions();
-    UserAccessibilityFieldStation setOfFieldStations = new UserAccessibilityFieldStation();
+    public User currentUser;
+    public Permissions currentUserPermissions;
+    public UserAccessibilityFieldStation setOfFieldStations;
     
     public void login(String test, String test2){
         
