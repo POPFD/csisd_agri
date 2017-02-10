@@ -25,35 +25,36 @@ public class FSManagerGUI {
     }
     
     public void configureUserPermissions(User user){
-        
+        //TODO: dont know how to implement this
     }
     
     public void configureUI(Permissions permission){
-        
+        //TODO: dont know how to implement this
     }
     
     public void addNewFieldStation(Double test, Double test2, String test3){
-        
+        //TODO: need to finissh
     }
     
     public void addNewSensor(Double test, Double test2, String test3){
-        
+        //TODO: need to finish
     }
     
     public Reading getData(){
+        //TODO: where is this reading coming from????
         return reading;
     }
     
     public void displayData(){
-        
+        //TODO: What data are we displaying?????
     }
     
     public void changeUserPermissions(Farm farm, AccessLevel accessLevel){
-        
+        //TOD: how do the permissions work?
     }
     
-    public addUserPermissions(String string, AccessLevel accessLevel){
-        
+    public void addUserPermissions(String string, AccessLevel accessLevel){
+        //TODO: how to the permissions work?
     }
     
     
