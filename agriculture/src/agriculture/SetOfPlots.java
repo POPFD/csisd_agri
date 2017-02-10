@@ -5,11 +5,13 @@
  */
 package agriculture;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author student
  */
-public class SetOfPlots {
+public class SetOfPlots extends ArrayList<Plot> {
     
     public SetOfPlots()
     {
@@ -18,6 +20,25 @@ public class SetOfPlots {
     
     public void addPlot(Plot aPlot){
         super.add(aPlot);
+    }
+    
+    public void removePlot(Plot aPlot){
+        super.remove(aPlot);
+    }
+    
+    public SetOfPlots findPlotsByCropType(CropName cropName)
+    {
+        SetOfPlots result = new SetOfPlots();
+        
+        
+        for(Plot tmp: this)
+        {
+            if (tmp.getCrop().getCropType() == cropName)
+            {
+                result.addPlot(tmp);
+            }
+        }
+        return result;
     }
     
 }
