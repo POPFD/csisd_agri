@@ -9,7 +9,7 @@ package agriculture;
  *
  * @author student
  */
-public class DescreteDataHandler {
+public class DescreteDataHandler extends DataHandlerMethod {
     
     public Reading handleRawData(){
         

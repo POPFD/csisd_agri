@@ -9,7 +9,7 @@ package agriculture;
  *
  * @author student
  */
-public class MaxMinDataHandler {
+public class MaxMinDataHandler extends DataHandlerMethod{
     private double MaxReading;
     private double MinReading;
     

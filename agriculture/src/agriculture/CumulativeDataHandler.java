@@ -9,7 +9,7 @@ package agriculture;
  *
  * @author student
  */
-public class CumulativeDataHandler {
+public class CumulativeDataHandler extends DataHandlerMethod {
     
     private double cumulativeTotal;
     

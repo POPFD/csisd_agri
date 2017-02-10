@@ -9,7 +9,7 @@ package agriculture;
  *
  * @author student
  */
-public class BarometricDataHandler {
+public class BarometricDataHandler extends DataHandlerMethod{
     
     private Reading previousReading;
     
