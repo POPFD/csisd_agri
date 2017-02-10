@@ -15,7 +15,7 @@ public class User {
     private final String name;
     private final String password;
     
-    private Permissions permissions = null;
+    private SetOfFarmAccess permissions = null;
     
     public User(String username, String name, String password)
     {
@@ -24,12 +24,12 @@ public class User {
         this.password = password;
     }
     
-    public void setPermissions(Permissions newPerms)
+    public void setPermissions(SetOfFarmAccess newPerms)
     {
         permissions = newPerms;
     }
     
-    public Permissions getPermissions()
+    public SetOfFarmAccess getPermissions()
     {
         return permissions;
     }
