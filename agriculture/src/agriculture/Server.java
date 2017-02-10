@@ -14,8 +14,27 @@ public class Server {
     public FieldStation setOfFieldStations;
     public Farms setOfFarms;
     
-    public SetOfReadings requestReadingsByarm(Farm){
-        
+    public SetOfReadings requestReadingsByFarm(Farm farm){
+        //TODO: where are these readings coming from? assuming its from the fieldStations
     }
     
+    public Reading returnReading(){
+        return 0;
+    }
+    
+    public User validateLogin(String username, String password){
+        return 0;
+    }
+    
+    public FieldStation getUserFieldStations(Permissions permission){
+        return 0;
+    }
+    
+    public void addFieldStation(Double example, Double example2, String example3){
+        //TODO:  what is being passed in?? 
+    }
+    
+    public void addSensor(Double example, Double example2){
+        //TODO:  what is being passed in??
+    }    
 }

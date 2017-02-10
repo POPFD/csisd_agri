@@ -14,10 +14,10 @@ public class FSManagerGUI {
     public Permissions currentUserPermissions;
     public UserAccessibilityFieldStation setOfFieldStations;
     
-    // changed void to boolean to give a response whether 
-    // the user has logged in successfully or not
-    public boolean login(String username, String password){
-        return 0;
+    
+    public void login(String username, String password){
+        //login now should make a request to the server
+        //there is a function there that has - validLogin();
     }
     
     public void displayMessage(String message){
