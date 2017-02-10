@@ -14,12 +14,14 @@ public class FSManagerGUI {
     public Permissions currentUserPermissions;
     public UserAccessibilityFieldStation setOfFieldStations;
     
-    public void login(String test, String test2){
-        
+    // changed void to boolean to give a response whether 
+    // the user has logged in successfully or not
+    public boolean login(String username, String password){
+        return 0;
     }
     
-    public void displayMessage(String test){
-        
+    public void displayMessage(String message){
+        //sys(message);
     }
     
     public void configureUserPermissions(User user){
