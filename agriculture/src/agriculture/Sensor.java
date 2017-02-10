@@ -14,7 +14,6 @@ import java.util.Date;
 public class Sensor {
     
     private static int idCounter = 0;
-    
     private final int sensorID;
     
     private Location sensorLocation;
@@ -30,6 +29,11 @@ public class Sensor {
         
         handlerMethod = handler;
         sensorLocation = new Location(longitude, latitude);
+    }
+    
+    public int getID()
+    {
+        return sensorID;
     }
     
     public void updateLocation(Location newLocation)
