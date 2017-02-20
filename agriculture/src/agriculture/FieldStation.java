@@ -20,21 +20,21 @@ public class FieldStation {
     private final int fieldStationID; 
     private SetOfSensorMonitors stationMonitors;
      
-    public Location stationLocation;
+    public Location fieldStationLocation;
     public Farm farmLocatedIn;
 
   
     public FieldStation(Double lat, Double lng, Farm farm){
         //Creating unique ID every time
-        fieldStationID = idCounter;
-        idCounter++;
+        this.fieldStationID = idCounter;
+        this.idCounter++;
         
-        stationLocation = new Location(lat, lng);
-        farmLocatedIn = farm;
+        this.fieldStationLocation = new Location(lat, lng);
+        this.farmLocatedIn = farm;
     }
     
     public void updateLocation(Location location){
-        stationLocation = location;
+        this.fieldStationLocation = location;
     }
     
     public void getSesorData(){
@@ -47,6 +47,21 @@ public class FieldStation {
     
     public SetOfSensorMonitors getSensorMonitors(){
         return stationMonitors;
+    }
+    
+    //ADDED GETTER FOR ID
+    public int getFieldStationID(){
+        return this.fieldStationID;
+    }
+    
+    //ADDED GETTER FOR LOCATION
+    public Location getFieldStationLocation(){
+        return this.fieldStationLocation;
+    }
+    
+    //ADDED GETTER FOR NAME
+    public Farm getFieldStationFarm(){
+        return this.farmLocatedIn;
     }
     
 }
