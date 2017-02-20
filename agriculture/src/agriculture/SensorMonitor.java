@@ -20,10 +20,18 @@ public class SensorMonitor {
     
     
     public SensorMonitor(double frequency, Sensor sens) {
+        
+        this.monitorID = idCounter;
+        idCounter++;
+        
         this.sensor = sens;
         this.readingFrequency = frequency;
         
         this.readings = new SetOfReadings();       
+    }
+    
+    public Sensor getSensor() {
+        return sensor;
     }
     
     
