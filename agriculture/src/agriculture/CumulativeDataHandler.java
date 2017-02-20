@@ -13,7 +13,7 @@ public class CumulativeDataHandler extends DataHandlerMethod {
     
     private double cumulativeTotal;
     
-    public Reading handleRawData(){
+    public Reading handleRawData(Reading rawReading){
         
         return 0;
         

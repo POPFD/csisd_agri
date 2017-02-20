@@ -14,7 +14,6 @@ import java.util.Date;
 public class Sensor {
     
     private static int idCounter = 0;
-    
     private final int sensorID;
     
     private Location sensorLocation;
@@ -32,6 +31,11 @@ public class Sensor {
         sensorLocation = new Location(longitude, latitude);
     }
     
+    public int getID()
+    {
+        return sensorID;
+    }
+    
     public void updateLocation(Location newLocation)
     {
         sensorLocation = newLocation;
@@ -44,8 +48,8 @@ public class Sensor {
         //TODO: Need to figure out what tmpObj is!!?!?
         Object tmpObj = new Object();
         
-        rawReading = new Reading(currDT, tmpObj, sensorLoction);
-        processedReading = handlerMethod(rawReading);
+        rawReading = new Reading(currDT, tmpObj, sensorLocation);
+        processedReading = handlerMethod.handleRawData(rawReading);
         
         return processedReading;
     }

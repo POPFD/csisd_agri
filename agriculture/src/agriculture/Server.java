@@ -7,15 +7,14 @@ package agriculture;
 
 /**
  *
- * @author student
+ * @author sambowenhughes
  */
-public class BarometricDataHandler extends DataHandlerMethod{
+public class Server {
+    public Users setOfUsers;
+    public FieldStation setOfFieldStations;
+    public Farms setOfFarms;
     
-    private Reading previousReading;
-    
-    public Reading handleRawData(Reading rawReading){
-        
-        return 0;
+    public SetOfReadings requestReadingsByarm(Farm){
         
     }
     
