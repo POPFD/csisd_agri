@@ -13,6 +13,6 @@ public enum PlotState {
     Empty,
     Planned,
     Harvesting,
-    Ready_To_Harvest,
+    ReadyToHarvest,
     Occupied
 }

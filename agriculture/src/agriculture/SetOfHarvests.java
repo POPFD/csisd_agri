@@ -40,13 +40,17 @@ public class SetOfHarvests extends ArrayList<Harvest> {
         return harvest;
     }
     
-    public Harvest getHarvestByCrop(Crop cropname) {
-        Harvest harvest = null;
-        for(Harvest h: this) {
-            if(h.getCropType() == cropname) {
-                harvest = h;
+    public SetOfHarvests getHarvestByCrop(Crop cropname) {
+        SetOfHarvests result = new SetOfHarvests();
+        
+        
+        for(Harvest tmp: this)
+        {
+            if (tmp.getCropType() == cropname)
+            {
+                result.addHarvest(tmp);
             }
         }
-        return harvest;
+        return result;
     }
 }
