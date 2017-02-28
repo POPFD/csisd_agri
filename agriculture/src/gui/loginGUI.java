@@ -10,12 +10,12 @@ package gui;
  *
  * @author sambowenhughes
  */
-public class GUI extends javax.swing.JPanel {
+public class loginGUI extends javax.swing.JPanel {
 
     /**
      * Creates new form GUI
      */
-    public GUI() {
+    public loginGUI() {
         initComponents();
     }
 
@@ -131,8 +131,6 @@ public class GUI extends javax.swing.JPanel {
                 .addComponent(jButton2)
                 .addContainerGap())
         );
-
-        jButton2.getAccessibleContext().setAccessibleName("Settings");
     }// </editor-fold>//GEN-END:initComponents
 
 
