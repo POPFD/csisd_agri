@@ -1,3 +1,4 @@
 *workspace.xml
 *.DS_Store
 /agriculture/nbproject/private/
+/agriculture/build/
