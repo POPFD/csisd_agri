@@ -27,7 +27,7 @@ public class Plot {
     }
     
     public void setCrop(Crop aCrop){
-        Crop = aCrop;
+        crop = aCrop;
     }
     
     public void setLocation(Location aLocation){
