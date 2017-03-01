@@ -10,12 +10,43 @@ package agriculture;
  * @author sambowenhughes
  */
 public class Server {
-    public Users setOfUsers;
-    public FieldStation setOfFieldStations;
-    public Farms setOfFarms;
+    public SetOfUsers setOfUsers;
+    public SetOfFieldStations setOfFieldStations;
+    public SetOfFarms setOfFarms;
     
-    public SetOfReadings requestReadingsByarm(Farm){
+    public SetOfReadings requestReadingsByarm(Farm farm){
         
     }
     
+    public SetOfReadings returnReading() {
+        
+    }
+    
+    public User validateLogin(String username, String password) {
+        User user = null;
+        for(User u: setOfUsers) {
+            if(u.getUsername().equals(username)) {
+                if(u.checkPassword(password)) {
+                    user = u;
+                }
+            }
+        }
+        return user;
+    }
+    
+    public SetOfFieldStations getUserFieldStations(SetOfFarmAccess permissions) {
+       
+    }
+    
+    public void addFieldStation(double longitude, double latitude, String name) {
+        Farm farm = setOfFarms.getFarmByName(name);
+        FieldStation fieldStation = new FieldStation(latitude, longitude, farm);
+        setOfFieldStations.add(fieldStation);
+    }
+    
+    public void addSensor(double longitude, double latitude, SensorType type) {
+        Location location = new Location(longitude, latitude);
+        FieldStation fieldStation = setOfFieldStations.getFieldStationByLocation(location);
+        fieldStation.addNewSensor(type);
+    }
 }
