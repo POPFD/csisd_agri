@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui;
+package agriculture;
 
 /**
  *
  * @author SaneetBhella
  */
-public class AddSensorForm extends javax.swing.JPanel {
+public class FormAddSensor extends javax.swing.JPanel {
 
     /**
      * Creates new form AddSensorForm
      */
-    public AddSensorForm() {
+    public FormAddSensor() {
         initComponents();
     }
 
@@ -51,8 +51,8 @@ public class AddSensorForm extends javax.swing.JPanel {
         txtBoxSensorName = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtAreaDescription = new javax.swing.JTextArea();
-        cBoxType = new javax.swing.JComboBox<>();
-        cBoxMeasurement = new javax.swing.JComboBox<>();
+        cBoxType = new javax.swing.JComboBox<String>();
+        cBoxMeasurement = new javax.swing.JComboBox<String>();
         btnAdd = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
 
@@ -133,9 +133,9 @@ public class AddSensorForm extends javax.swing.JPanel {
         txtAreaDescription.setRows(5);
         jScrollPane1.setViewportView(txtAreaDescription);
 
-        cBoxType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cBoxType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        cBoxMeasurement.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cBoxMeasurement.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         btnAdd.setText("Add Sensor");
 

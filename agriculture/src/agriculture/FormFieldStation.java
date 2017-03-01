@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui;
+package agriculture;
 
 /**
  *
  * @author SaneetBhella
  */
-public class FieldStationForm extends javax.swing.JPanel {
+public class FormFieldStation extends javax.swing.JPanel {
 
     /**
      * Creates new form FieldStationForm
      */
-    public FieldStationForm() {
+    public FormFieldStation() {
         initComponents();
     }
 

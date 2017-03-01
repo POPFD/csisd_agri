@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui;
+package agriculture;
 
 /**
  *
  * @author sambowenhughes
  */
-public class viewSensors extends javax.swing.JPanel {
+public class FormViewSensors extends javax.swing.JPanel {
 
     /**
      * Creates new form viewSensors
      */
-    public viewSensors() {
+    public FormViewSensors() {
         initComponents();
     }
 
@@ -41,7 +41,7 @@ public class viewSensors extends javax.swing.JPanel {
         btnPreviousData = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        javax.swing.JList<String> jList1 = new javax.swing.JList<>();
+        javax.swing.JList<String> jList1 = new javax.swing.JList<String>();
         lblFieldStationID1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -154,10 +154,10 @@ public class viewSensors extends javax.swing.JPanel {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+        jList1.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+            public Object getElementAt(int i) { return strings[i]; }
         });
         jScrollPane1.setViewportView(jList1);
 
