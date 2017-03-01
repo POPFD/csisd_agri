@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui;
+package agriculture;
 
 /**
  *
  * @author sambowenhughes
  */
-public class viewFarmPage extends javax.swing.JPanel {
+public class FormViewFarm extends javax.swing.JPanel {
 
     /**
      * Creates new form viewFarmPage
      */
-    public viewFarmPage() {
+    public FormViewFarm() {
         initComponents();
     }
 
@@ -340,8 +340,6 @@ public class viewFarmPage extends javax.swing.JPanel {
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(424, Short.MAX_VALUE)))
         );
-
-        button1.getAccessibleContext().setAccessibleName("Settings");
     }// </editor-fold>//GEN-END:initComponents
 
 

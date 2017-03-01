@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui;
+package agriculture;
 
 /**
  *
  * @author SaneetBhella
  */
-public class ViewFarmsForm extends javax.swing.JPanel {
+public class FormViewFarms extends javax.swing.JPanel {
 
     /**
      * Creates new form FieldStationForm
      */
-    public ViewFarmsForm() {
+    public FormViewFarms() {
         initComponents();
     }
 
@@ -29,7 +29,7 @@ public class ViewFarmsForm extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        jList1 = new javax.swing.JList<String>();
         btnLogout = new javax.swing.JButton();
         btnViewFarm = new javax.swing.JButton();
         btnContact = new javax.swing.JButton();
@@ -40,10 +40,10 @@ public class ViewFarmsForm extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
         jLabel1.setText("Farms");
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+        jList1.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+            public Object getElementAt(int i) { return strings[i]; }
         });
         jScrollPane1.setViewportView(jList1);
 

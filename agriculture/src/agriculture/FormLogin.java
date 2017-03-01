@@ -1,4 +1,4 @@
-package gui;
+package agriculture;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -10,12 +10,12 @@ package gui;
  *
  * @author sambowenhughes
  */
-public class loginGUI extends javax.swing.JPanel {
+public class FormLogin extends javax.swing.JPanel {
 
     /**
      * Creates new form GUI
      */
-    public loginGUI() {
+    public FormLogin() {
         initComponents();
     }
 
