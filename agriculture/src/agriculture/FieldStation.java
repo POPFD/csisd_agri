@@ -36,13 +36,40 @@ public class FieldStation {
     public void updateLocation(Location location){
         this.fieldStationLocation = location;
     }
-    
-    public void getSesorData(){
-        //TODO: need to work on what the getSensor data returns
-    }
-    
+      
     public void addNewSensor(SensorType type){
-        //TODO: dont know how to add a sensor without a sensor being passed in as a parameter
+
+        /* Choose appropriate data handler for type of sensor */
+        DataHandlerMethod newHandler = null;
+        switch(type) 
+        {
+            case BAROMETRIC:
+            {
+                newHandler = new BarometricDataHandler();
+                break;
+            }
+            
+            case TEMPERATURE:
+            {
+                newHandler = new MaxMinDataHandler();
+                break;
+            }
+            
+            case RAINFALL:
+            {
+                newHandler = new CumulativeDataHandler();
+                break;
+            }
+        }
+        
+        Sensor newSensor = new Sensor(fieldStationLocation.getLongitude(), 
+                                    fieldStationLocation.getLatitude(),
+                                    newHandler);
+        
+        /* For new frequency is static */
+        SensorMonitor newMonitor = new SensorMonitor(1, newSensor);
+        
+        stationMonitors.add(newMonitor); 
     }
     
     public SetOfSensorMonitors getSensorMonitors(){
