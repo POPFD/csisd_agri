@@ -17,7 +17,7 @@ public class Farm {
    private SetOfFarms fields;
    private User farmOwner;
    
-   public Farm(String farmName, String farmAddress, String farmOwner) {
+   public Farm(String farmName, String farmAddress, User farmOwner) {
        this.farmName = farmName;
        this.farmAddress = farmAddress;
        this.farmOwner = farmOwner;
@@ -27,7 +27,7 @@ public class Farm {
        this.fields = fields;
    }
    
-   public void getFields() {
+   public SetOfFarms getFields() {
        return fields;
    }
 
