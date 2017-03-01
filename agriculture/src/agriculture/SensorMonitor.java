@@ -13,10 +13,13 @@ import java.util.Date;
  */
 public class SensorMonitor {
     
-    private Sensor sensor;
-    private SetOfReadings readings;
-    private double readingFrequency;
-    private Date lastReading;
+    private static int idCounter = 0;
+    private final int monitorID;
+
+    private final Sensor sensor;
+    private final SetOfReadings readings;
+    //private double readingFrequency;
+    //private Date lastReading;
     
     
     public SensorMonitor(double frequency, Sensor sens) {
@@ -25,9 +28,15 @@ public class SensorMonitor {
         idCounter++;
         
         this.sensor = sens;
-        this.readingFrequency = frequency;
+        
+        /* Removing reading frequency for now as does not seem to be needed */
+        //this.readingFrequency = frequency;
         
         this.readings = new SetOfReadings();       
+    }
+    
+    public int getID() {
+        return monitorID;
     }
     
     public Sensor getSensor() {

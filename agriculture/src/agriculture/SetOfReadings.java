@@ -5,10 +5,25 @@
  */
 package agriculture;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author user
  */
-public class SetOfReadings {
+public class SetOfReadings extends ArrayList<Reading> {
+    
+    public SetOfReadings()
+    {
+        super();
+    }
+    
+    public void addReading(Reading reading) {
+        super.add(reading);
+    }
+    
+    public void removeReading(Reading reading) {
+        super.remove(reading);
+    }
     
 }
