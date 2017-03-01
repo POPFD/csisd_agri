@@ -41,7 +41,7 @@ public class FieldStation {
         //TODO: need to work on what the getSensor data returns
     }
     
-    public void addNewSensor(){
+    public void addNewSensor(SensorType type){
         //TODO: dont know how to add a sensor without a sensor being passed in as a parameter
     }
     
