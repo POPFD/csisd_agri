@@ -10,12 +10,13 @@ package agriculture;
  * @author SaneetBhella
  */
 public class FormViewFarms extends javax.swing.JPanel {
-
+    private Server server;
     /**
      * Creates new form FieldStationForm
      */
-    public FormViewFarms() {
+    public FormViewFarms(Server server) {
         initComponents();
+        this.server = server;
     }
 
     /**
@@ -29,7 +30,7 @@ public class FormViewFarms extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<String>();
+        farmList = new javax.swing.JList<>();
         btnLogout = new javax.swing.JButton();
         btnViewFarm = new javax.swing.JButton();
         btnContact = new javax.swing.JButton();
@@ -40,12 +41,12 @@ public class FormViewFarms extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
         jLabel1.setText("Farms");
 
-        jList1.setModel(new javax.swing.AbstractListModel() {
+        farmList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
+            public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(farmList);
 
         btnLogout.setText("Logout");
 
@@ -127,10 +128,10 @@ public class FormViewFarms extends javax.swing.JPanel {
     private javax.swing.JButton btnContact;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnViewFarm;
+    private javax.swing.JList<String> farmList;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
