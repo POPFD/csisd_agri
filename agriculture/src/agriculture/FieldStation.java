@@ -27,7 +27,7 @@ public class FieldStation {
     public FieldStation(Double lat, Double lng, Farm farm){
         //Creating unique ID every time
         this.fieldStationID = idCounter;
-        this.idCounter++;
+        idCounter++;
         
         this.fieldStationLocation = new Location(lat, lng);
         this.farmLocatedIn = farm;
@@ -39,32 +39,10 @@ public class FieldStation {
       
     public void addNewSensor(SensorType type){
 
-        /* Choose appropriate data handler for type of sensor */
-        DataHandlerMethod newHandler = null;
-        switch(type) 
-        {
-            case BAROMETRIC:
-            {
-                newHandler = new BarometricDataHandler();
-                break;
-            }
-            
-            case TEMPERATURE:
-            {
-                newHandler = new MaxMinDataHandler();
-                break;
-            }
-            
-            case RAINFALL:
-            {
-                newHandler = new CumulativeDataHandler();
-                break;
-            }
-        }
-        
+        /* Create new sensor and add to sensor monitor */
         Sensor newSensor = new Sensor(fieldStationLocation.getLongitude(), 
                                     fieldStationLocation.getLatitude(),
-                                    newHandler);
+                                    type);
         
         /* For new frequency is static */
         SensorMonitor newMonitor = new SensorMonitor(1, newSensor);
