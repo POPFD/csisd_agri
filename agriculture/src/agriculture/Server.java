@@ -13,14 +13,32 @@ public class Server {
     public SetOfUsers setOfUsers;
     public SetOfFieldStations setOfFieldStations;
     public SetOfFarms setOfFarms;
-    
-    public SetOfReadings requestReadingsByarm(Farm farm){
-        
+
+    public SetOfUsers getSetOfUsers() {
+        return setOfUsers;
+    }
+
+    public void setSetOfUsers(SetOfUsers setOfUsers) {
+        this.setOfUsers = setOfUsers;
+    }
+
+    public SetOfFarms getSetOfFarms() {
+        return setOfFarms;
+    }
+
+    public void setSetOfFarms(SetOfFarms setOfFarms) {
+        this.setOfFarms = setOfFarms;
     }
     
-    public SetOfReadings returnReading() {
-        
-    }
+    
+    
+//    public SetOfReadings requestReadingsByarm(Farm farm){
+//        
+//    }
+//    
+//    public SetOfReadings returnReading() {
+//        
+//    }
     
     public User validateLogin(String username, String password) {
         User user = null;
@@ -34,9 +52,9 @@ public class Server {
         return user;
     }
     
-    public SetOfFieldStations getUserFieldStations(SetOfFarmAccess permissions) {
-       
-    }
+//    public SetOfFieldStations getUserFieldStations(SetOfFarmAccess permissions) {
+//       
+//    }
     
     public void addFieldStation(double longitude, double latitude, String name) {
         Farm farm = setOfFarms.getFarmByName(name);
