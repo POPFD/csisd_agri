@@ -34,7 +34,7 @@ public class Plot {
         gpsLocation = aLocation;
     }
     
-    public void setHarvestHistory(PlotHistory aHistory){
+    public void setHarvestHistory(SetOfHarvests aHistory){
         plotHistory = aHistory;
     }
     
