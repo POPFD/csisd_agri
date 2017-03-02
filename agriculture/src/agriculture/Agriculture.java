@@ -27,11 +27,10 @@ public class Agriculture {
         
         SetOfUsers setOfusers = new SetOfUsers();
         setOfusers.add(user);
-        
+                
         Server server = new Server();
         server.setSetOfUsers(setOfusers);
         server.setSetOfFarms(setOfFarms);
-        
         
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {

@@ -5,18 +5,23 @@
  */
 package agriculture;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author SaneetBhella
  */
 public class FormViewFarms extends javax.swing.JPanel {
-    private Server server;
+    private final Server server;
     /**
      * Creates new form FieldStationForm
+     * @param server
      */
     public FormViewFarms(Server server) {
         initComponents();
         this.server = server;
+        farmList.setListData(server.getSetOfFarms().toArray());
     }
 
     /**
@@ -30,7 +35,7 @@ public class FormViewFarms extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        farmList = new javax.swing.JList<>();
+        farmList = new javax.swing.JList();
         btnLogout = new javax.swing.JButton();
         btnViewFarm = new javax.swing.JButton();
         btnContact = new javax.swing.JButton();
@@ -41,10 +46,10 @@ public class FormViewFarms extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
         jLabel1.setText("Farms");
 
-        farmList.setModel(new javax.swing.AbstractListModel<String>() {
+        farmList.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+            public Object getElementAt(int i) { return strings[i]; }
         });
         jScrollPane1.setViewportView(farmList);
 
@@ -128,7 +133,7 @@ public class FormViewFarms extends javax.swing.JPanel {
     private javax.swing.JButton btnContact;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnViewFarm;
-    private javax.swing.JList<String> farmList;
+    private javax.swing.JList farmList;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;

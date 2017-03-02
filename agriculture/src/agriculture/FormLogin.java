@@ -15,10 +15,11 @@ import javax.swing.SwingUtilities;
  */
 public class FormLogin extends javax.swing.JPanel {
 
-    private Server server;
+    private final Server server;
     
     /**
      * Creates new form GUI
+     * @param server
      */
     public FormLogin(Server server) {
         initComponents();
