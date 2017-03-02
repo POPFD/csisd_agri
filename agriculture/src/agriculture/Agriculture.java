@@ -19,7 +19,7 @@ public class Agriculture {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        User user = new User("johnsmith", "John Smith", "sheffieldhallam");
+        User user = new User("john", "John Smith", "sheff");
         Farm farm = new Farm("Sheffield Farm", "Farm Address..", user);
         
         SetOfFarms setOfFarms = new SetOfFarms();
