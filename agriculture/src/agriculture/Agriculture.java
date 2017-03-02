@@ -20,10 +20,12 @@ public class Agriculture {
     public static void main(String[] args) {
         // TODO code application logic here
         User user = new User("john", "John Smith", "sheff");
-        Farm farm = new Farm("Sheffield Farm", "Farm Address..", user);
+        Farm farm = new Farm("Sheffield Farm", "Sheffield 177 Road", user);
+        Farm farm2 = new Farm("Wales Farm", "Wales 455 Road", user);
         
         SetOfFarms setOfFarms = new SetOfFarms();
         setOfFarms.add(farm);
+        setOfFarms.add(farm2);
         
         SetOfUsers setOfusers = new SetOfUsers();
         setOfusers.add(user);
