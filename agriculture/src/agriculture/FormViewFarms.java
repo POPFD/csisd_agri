@@ -16,12 +16,22 @@ public class FormViewFarms extends javax.swing.JPanel {
     private final Server server;
     /**
      * Creates new form FieldStationForm
+     * 
      * @param server
      */
     public FormViewFarms(Server server) {
         initComponents();
         this.server = server;
-        farmList.setListData(server.getSetOfFarms().toArray());
+        setFarmListBox();
+    }
+    
+    public void setFarmListBox() {
+        List list = new ArrayList<String>();
+        for(int i = 0; i < server.getSetOfFarms().size(); i++) {
+            list.add(server.getSetOfFarms().get(i).getFarmName());
+            System.out.print(server.getSetOfFarms().get(i).getFarmName());
+        }
+        farmList.setListData(list.toArray());
     }
 
     /**
