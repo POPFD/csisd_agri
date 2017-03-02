@@ -46,9 +46,10 @@ public class Agriculture {
         
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                FormLogin loginForm = new FormLogin(server);
+                
                 JFrame frame = new JFrame();
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                FormLogin loginForm = new FormLogin(server, frame);
+                frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 frame.getContentPane().add(loginForm);
                 frame.pack();
                 frame.setVisible(true);
