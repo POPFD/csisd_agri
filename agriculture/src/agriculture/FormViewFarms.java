@@ -7,6 +7,8 @@ package agriculture;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
 
 /**
  *
@@ -31,6 +33,7 @@ public class FormViewFarms extends javax.swing.JPanel {
             list.add(server.getSetOfFarms().get(i).getFarmName());
             System.out.print(server.getSetOfFarms().get(i).getFarmName());
         }
+        
         farmList.setListData(list.toArray());
     }
 
@@ -47,11 +50,13 @@ public class FormViewFarms extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         farmList = new javax.swing.JList();
         btnLogout = new javax.swing.JButton();
-        btnViewFarm = new javax.swing.JButton();
         btnContact = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        farmView = new javax.swing.JButton();
+        errorLabel = new javax.swing.JLabel();
+        errorLbl = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
         jLabel1.setText("Farms");
@@ -64,8 +69,6 @@ public class FormViewFarms extends javax.swing.JPanel {
         jScrollPane1.setViewportView(farmList);
 
         btnLogout.setText("Logout");
-
-        btnViewFarm.setText("View Farm");
 
         btnContact.setText("Contact");
 
@@ -89,6 +92,15 @@ public class FormViewFarms extends javax.swing.JPanel {
         jButton1.setForeground(new java.awt.Color(255, 0, 0));
         jButton1.setText("x");
 
+        farmView.setText("View Farm");
+        farmView.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                farmViewActionPerformed(evt);
+            }
+        });
+
+        errorLbl.setForeground(new java.awt.Color(255, 0, 51));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -97,9 +109,11 @@ public class FormViewFarms extends javax.swing.JPanel {
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(farmView)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnViewFarm)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 475, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -109,10 +123,21 @@ public class FormViewFarms extends javax.swing.JPanel {
                         .addContainerGap(24, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(34, 34, 34)
+                                        .addComponent(errorLabel))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(errorLbl)))
+                                .addGap(0, 0, Short.MAX_VALUE))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -120,7 +145,10 @@ public class FormViewFarms extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(23, 23, 23)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(errorLabel)
+                            .addComponent(errorLbl)))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -129,21 +157,49 @@ public class FormViewFarms extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnViewFarm)
+                .addComponent(farmView)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnContact)
                     .addComponent(btnLogout))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
+
+        farmView.getAccessibleContext().setAccessibleName("farmView");
+        errorLabel.getAccessibleContext().setAccessibleName("errorLabel");
+        errorLbl.getAccessibleContext().setAccessibleName("errorLbl");
     }// </editor-fold>//GEN-END:initComponents
 
+    private void farmViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_farmViewActionPerformed
+        // TODO add your handling code her
+        String farmSelected = (String) farmList.getSelectedValue();
+        if(farmSelected == null){
+            errorLbl.setText("Please select a farm from the list");
+        }else{
+            errorLbl.setText("");
+            Farm farm = server.getSetOfFarms().getFarmByName(farmSelected);
+            javax.swing.SwingUtilities.invokeLater(new Runnable() {
+                    public void run() {
+                        FormViewFarm viewFarm = new FormViewFarm(server, farm);
+                        JFrame frame = new JFrame();
+                        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                        frame.getContentPane().add(viewFarm);
+                        frame.pack();
+                        frame.setVisible(true);
+                    }
+                });
+        }
+    }//GEN-LAST:event_farmViewActionPerformed
 
+
+      
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnContact;
     private javax.swing.JButton btnLogout;
-    private javax.swing.JButton btnViewFarm;
+    private javax.swing.JLabel errorLabel;
+    private javax.swing.JLabel errorLbl;
     private javax.swing.JList farmList;
+    private javax.swing.JButton farmView;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
