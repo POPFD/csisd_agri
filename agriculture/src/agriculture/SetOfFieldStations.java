@@ -54,4 +54,16 @@ public class SetOfFieldStations extends ArrayList<FieldStation> {
         }
         return station;
     }
+    
+    public SetOfFieldStations getSetOfFieldStationsByName(String farmname){
+        SetOfFieldStations list = new SetOfFieldStations();
+        for(FieldStation f: this) {
+            Farm farm = f.getFieldStationFarm();
+            if(farm.getFarmName().equals(farmname)){
+                list.add(f);
+            }
+        }
+        return list;
+    }
+            
 }

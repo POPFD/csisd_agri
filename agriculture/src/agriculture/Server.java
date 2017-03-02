@@ -29,6 +29,14 @@ public class Server {
     public void setSetOfFarms(SetOfFarms setOfFarms) {
         this.setOfFarms = setOfFarms;
     }
+
+    public SetOfFieldStations getSetOfFieldStations() {
+        return setOfFieldStations;
+    }
+
+    public void setSetOfFieldStations(SetOfFieldStations setOfFieldStations) {
+        this.setOfFieldStations = setOfFieldStations;
+    }
     
     
     
