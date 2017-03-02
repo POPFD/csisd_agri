@@ -23,17 +23,27 @@ public class Agriculture {
         Farm farm = new Farm("Sheffield Farm", "Sheffield 177 Road", user);
         Farm farm2 = new Farm("Wales Farm", "Wales 455 Road", user);
         
+        
+        
         SetOfFarms setOfFarms = new SetOfFarms();
         setOfFarms.add(farm);
         setOfFarms.add(farm2);
         
+        
+        FieldStation fs1 = new FieldStation(1.234, -4.456, farm);
+        FieldStation fs2 = new FieldStation(1.234, -4.456, farm2);
+        SetOfFieldStations fieldStationList = new SetOfFieldStations();
+        fieldStationList.add(fs1);
+        fieldStationList.add(fs2);
+                
         SetOfUsers setOfusers = new SetOfUsers();
         setOfusers.add(user);
                 
         Server server = new Server();
         server.setSetOfUsers(setOfusers);
         server.setSetOfFarms(setOfFarms);
-                
+        server.setSetOfFieldStations(fieldStationList);
+        
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 

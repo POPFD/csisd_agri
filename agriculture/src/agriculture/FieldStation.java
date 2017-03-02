@@ -16,7 +16,7 @@ public class FieldStation {
     have also added a idCounter as an attribute for
     the creation of a unique ID every time
     */
-    private static int idCounter = 0;
+    private static int idCounter = 1111;
     private final int fieldStationID; 
     private SetOfSensorMonitors stationMonitors;
      
