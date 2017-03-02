@@ -16,15 +16,18 @@ import javax.swing.SwingUtilities;
 public class FormLogin extends javax.swing.JPanel {
 
     private final Server server;
+    private final JFrame previousFrame;
     
     /**
      * Creates new form GUI
      * @param server
+     * @param frame
      */
-    public FormLogin(Server server) {
+    public FormLogin(Server server, JFrame frame) {
         initComponents();
-        
+        lblIncorrectLogin.setVisible(false);
         this.server = server;
+        previousFrame = frame;
     }
 
     /**
@@ -46,6 +49,7 @@ public class FormLogin extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         btnLogin = new javax.swing.JButton();
+        lblIncorrectLogin = new javax.swing.JLabel();
 
         jButton1.setBackground(java.awt.SystemColor.controlHighlight);
         jButton1.setForeground(new java.awt.Color(255, 0, 0));
@@ -71,6 +75,18 @@ public class FormLogin extends javax.swing.JPanel {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Login");
 
+        txtFieldUsername.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                clearLabel(evt);
+            }
+        });
+
+        txtFieldPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                clearLabel(evt);
+            }
+        });
+
         jLabel3.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Username:");
@@ -87,6 +103,10 @@ public class FormLogin extends javax.swing.JPanel {
                 btnLoginActionPerformed(evt);
             }
         });
+
+        lblIncorrectLogin.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
+        lblIncorrectLogin.setForeground(new java.awt.Color(255, 51, 51));
+        lblIncorrectLogin.setText("Incorrect Login");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -107,7 +127,9 @@ public class FormLogin extends javax.swing.JPanel {
                                 .addComponent(txtFieldUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(281, 281, 281))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblIncorrectLogin)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(267, 267, 267))))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,7 +171,9 @@ public class FormLogin extends javax.swing.JPanel {
                     .addComponent(jLabel4))
                 .addGap(18, 18, 18)
                 .addComponent(btnLogin)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 136, Short.MAX_VALUE)
+                .addGap(27, 27, 27)
+                .addComponent(lblIncorrectLogin)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
                 .addComponent(jButton2)
                 .addContainerGap())
         );
@@ -157,6 +181,8 @@ public class FormLogin extends javax.swing.JPanel {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
+        lblIncorrectLogin.setVisible(false);
+        
         String username = txtFieldUsername.getText();
         String password = txtFieldPassword.getText();
         
@@ -167,15 +193,25 @@ public class FormLogin extends javax.swing.JPanel {
                     public void run() {
                         FormViewFarms viewFarms = new FormViewFarms(server);
                         JFrame frame = new JFrame();
-                        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                         frame.getContentPane().add(viewFarms);
                         frame.pack();
                         frame.setVisible(true);
+                        
+                        //hides previous form
+                        previousFrame.dispose();
                     }
                 });
+            } else{
+                lblIncorrectLogin.setVisible(true);
             }
         }
     }//GEN-LAST:event_btnLoginActionPerformed
+
+    private void clearLabel(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_clearLabel
+        // TODO add your handling code here:
+        lblIncorrectLogin.setVisible(false);
+    }//GEN-LAST:event_clearLabel
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -187,6 +223,7 @@ public class FormLogin extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblIncorrectLogin;
     private javax.swing.JTextField txtFieldPassword;
     private javax.swing.JTextField txtFieldUsername;
     // End of variables declaration//GEN-END:variables
