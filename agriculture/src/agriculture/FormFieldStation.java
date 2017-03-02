@@ -10,12 +10,19 @@ package agriculture;
  * @author SaneetBhella
  */
 public class FormFieldStation extends javax.swing.JPanel {
-
+    private final Server server;
+    private  FieldStation station;
     /**
      * Creates new form FieldStationForm
      */
-    public FormFieldStation() {
+    public FormFieldStation(Server server, FieldStation station) {
         initComponents();
+        this.server = server;
+        this.station = station;
+    
+        lblFarmName.setText(station.getFieldStationFarm().getFarmName());
+        lblFieldStationName.setText(Integer.toString(station.getFieldStationID()));
+        lblFieldStationID.setText(Integer.toString(station.getFieldStationID()));
     }
 
     /**

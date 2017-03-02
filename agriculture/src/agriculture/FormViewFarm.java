@@ -14,13 +14,14 @@ import javax.swing.JFrame;
  * @author sambowenhughes
  */
 public class FormViewFarm extends javax.swing.JPanel {
-
+    private final Server server;
     /**
      * Creates new form viewFarmPage
      */
     public FormViewFarm(Server server, Farm farmSelected) {
         initComponents();
         setupFieldStationList(server, farmSelected);
+        this.server = server;
         
         farmNameLabel.setText(farmSelected.getFarmName());
         farmOwnerLabel.setText(farmSelected.getFarmOwner().getName());
@@ -67,6 +68,7 @@ public class FormViewFarm extends javax.swing.JPanel {
         farmOwnerLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         fieldStationList = new javax.swing.JList();
+        jButton1 = new javax.swing.JButton();
         button1 = new java.awt.Button();
         button2 = new java.awt.Button();
         jButton5 = new javax.swing.JButton();
@@ -150,6 +152,13 @@ public class FormViewFarm extends javax.swing.JPanel {
         jScrollPane1.setViewportView(fieldStationList);
         fieldStationList.getAccessibleContext().setAccessibleName("fieldStationList");
 
+        jButton1.setText("View Field Station");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -178,7 +187,9 @@ public class FormViewFarm extends javax.swing.JPanel {
                                 .addComponent(farmOwnerLabel))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton1)))))
                 .addContainerGap(242, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -201,9 +212,12 @@ public class FormViewFarm extends javax.swing.JPanel {
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(farmOwnerLabel))
                 .addGap(18, 18, 18)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1))
                 .addContainerGap(47, Short.MAX_VALUE))
         );
 
@@ -282,6 +296,23 @@ public class FormViewFarm extends javax.swing.JPanel {
        //go back to login page
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        int stationID = (int) fieldStationList.getSelectedValue();
+        
+        FieldStation station = server.getSetOfFieldStations().getFieldStationByID(stationID);
+        javax.swing.SwingUtilities.invokeLater(new Runnable() {
+                    public void run() {
+                        FormFieldStation viewStation = new FormFieldStation(server, station);
+                        JFrame frame = new JFrame();
+                        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                        frame.getContentPane().add(viewStation);
+                        frame.pack();
+                        frame.setVisible(true);
+                    }
+                });
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Button button1;
@@ -290,6 +321,7 @@ public class FormViewFarm extends javax.swing.JPanel {
     private javax.swing.JLabel farmNameLabel;
     private javax.swing.JLabel farmOwnerLabel;
     private javax.swing.JList fieldStationList;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
