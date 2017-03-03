@@ -5,17 +5,39 @@
  */
 package agriculture;
 
+import java.util.Arrays;
+import java.util.ArrayList;
+
 /**
  *
  * @author student
  */
 public class MaxMinDataHandler extends DataHandlerMethod {
-    private double MaxReading;
-    private double MinReading;
+    private Double maxReading = 0.0;
+    private Double minReading = 0.0;
     
     public Reading handleRawData(Reading rawReading) {
         
-        return 0;
+        Double rawValue = (Double)rawReading.getReadingValue();
+        
+        /* Update maximum and minimum methods */
+        if (Double.compare(rawValue, maxReading) > 0)
+            maxReading = rawValue;
+        else if (Double.compare(rawValue, minReading) < 0)
+            minReading = rawValue;
+        
+        
+        /* Due to design of handlers, we have to create arraylist to
+         * return both the minimum and maximum values.
+         */
+        ArrayList<Double> procValue = new ArrayList<Double>();
+        procValue.add(maxReading);
+        procValue.add(minReading);
+        
+        Reading procReading = new Reading(rawReading.getReadingTime(),
+                                            procValue,
+                                            rawReading.getReadingLocation()); 
+        return procReading;
         
     }
 }

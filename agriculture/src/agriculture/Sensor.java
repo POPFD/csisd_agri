@@ -60,6 +60,11 @@ public class Sensor {
         return sensorID;
     }
     
+    public SensorType getType()
+    {
+        return sensorType;
+    }
+    
     public void updateLocation(Location newLocation)
     {
         sensorLocation = newLocation;
