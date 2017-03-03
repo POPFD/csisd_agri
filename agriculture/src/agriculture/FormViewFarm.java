@@ -17,13 +17,17 @@ import javax.swing.JOptionPane;
 public class FormViewFarm extends javax.swing.JPanel {
     private final Server server;
     private final Farm farmSelected;
+    private final JFrame frame;
+    private final User user;
     /**
      * Creates new form viewFarmPage
      */
-    public FormViewFarm(Server server, Farm farmSelected) {
+    public FormViewFarm(Server server, User user, Farm farmSelected, JFrame frame) {
         initComponents();
         this.server = server;
         this.farmSelected = farmSelected;
+        this.frame = frame;
+        this.user = user;
 
         setupFieldStationList();
         
@@ -388,9 +392,9 @@ public class FormViewFarm extends javax.swing.JPanel {
         FieldStation station = server.getSetOfFieldStations().getFieldStationByID(stationID);
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
                     public void run() {
-                        FormFieldStation viewStation = new FormFieldStation(server, station);
                         JFrame frame = new JFrame();
-                        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                        FormFieldStation viewStation = new FormFieldStation(server, station, user, farmSelected, frame);              
+                        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                         frame.getContentPane().add(viewStation);
                         frame.pack();
                         frame.setVisible(true);
@@ -400,13 +404,28 @@ public class FormViewFarm extends javax.swing.JPanel {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
-        //dispose();
+        frame.dispose();
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnAddStationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddStationActionPerformed
         // TODO add your handling code here:
         
         if(!txtLongitude.getText().equals("") && !txtLatitude.getText().equals("")) {
+            
+            //go through users' farm access
+            SetOfFarmAccess permissions = user.getPermissions();
+            for(FarmAccess access : permissions) {
+                if(access.getFarm() == farmSelected) {
+                    //check they have read and write access
+                    if(access.getAccessLevel() == AccessLevel.ReadWrite) {
+                        System.out.println("Allowed to edit");
+                    } else {
+                        System.out.println("Not allowed to edit");
+                        JOptionPane.showMessageDialog(null, "You do not have permission to edit this farm.");
+                        return;
+                    }
+                }
+            }
             
             try {
                 double longitude = Double.parseDouble(txtLongitude.getText());
