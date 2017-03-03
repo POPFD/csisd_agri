@@ -18,7 +18,7 @@ public class CumulativeDataHandler extends DataHandlerMethod {
     public Reading handleRawData(Reading rawReading) {
         
         /* To simulate cumulative resetting after set amount of time */
-        if (tickCount >= 24)
+        if (tickCount >= 23)
         {
             cumulativeTotal = 0.0;
             tickCount = 0;
