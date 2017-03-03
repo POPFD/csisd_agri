@@ -64,10 +64,15 @@ public class Server {
 //       
 //    }
     
-    public void addFieldStation(double longitude, double latitude, String name) {
+    public boolean addFieldStation(double longitude, double latitude, String name) {
         Farm farm = setOfFarms.getFarmByName(name);
-        FieldStation fieldStation = new FieldStation(latitude, longitude, farm);
-        setOfFieldStations.add(fieldStation);
+        if(farm != null) {
+            FieldStation fieldStation = new FieldStation(latitude, longitude, farm);
+            setOfFieldStations.add(fieldStation);
+            
+            return true;
+        }
+        return false;
     }
     
     public void addSensor(double longitude, double latitude, SensorType type) {

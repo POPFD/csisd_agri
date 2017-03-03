@@ -75,6 +75,11 @@ public class FormViewFarms extends javax.swing.JPanel {
         jScrollPane1.setViewportView(farmList);
 
         btnLogout.setText("Logout");
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
 
         btnContact.setText("Contact");
 
@@ -188,7 +193,7 @@ public class FormViewFarms extends javax.swing.JPanel {
                     public void run() {
                         FormViewFarm viewFarm = new FormViewFarm(server, farm);
                         JFrame frame = new JFrame();
-                        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                         frame.getContentPane().add(viewFarm);
                         frame.pack();
                         frame.setVisible(true);
@@ -196,6 +201,10 @@ public class FormViewFarms extends javax.swing.JPanel {
                 });
         }
     }//GEN-LAST:event_farmViewActionPerformed
+
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        //to implement
+    }//GEN-LAST:event_btnLogoutActionPerformed
 
 
       
