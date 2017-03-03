@@ -31,6 +31,8 @@ public class FieldStation {
         
         this.fieldStationLocation = new Location(lat, lng);
         this.farmLocatedIn = farm;
+        
+        this.stationMonitors = new SetOfSensorMonitors();
     }
     
     public void updateLocation(Location location){
