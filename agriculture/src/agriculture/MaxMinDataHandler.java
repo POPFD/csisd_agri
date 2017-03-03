@@ -13,6 +13,8 @@ import java.util.ArrayList;
  * @author student
  */
 public class MaxMinDataHandler extends DataHandlerMethod {
+    
+    private boolean firstReading = true;
     private Double maxReading = 0.0;
     private Double minReading = 0.0;
     
@@ -20,13 +22,21 @@ public class MaxMinDataHandler extends DataHandlerMethod {
         
         Double rawValue = (Double)rawReading.getReadingValue();
         
-        /* Update maximum and minimum methods */
-        if (Double.compare(rawValue, maxReading) > 0)
+        /* If is the first reading both our max and min would be that */
+        if (firstReading)
+        {
             maxReading = rawValue;
-        else if (Double.compare(rawValue, minReading) < 0)
             minReading = rawValue;
-        
-        
+            firstReading = false;
+        } else
+        {
+            /* Update maximum and minimum methods */
+            if (Double.compare(rawValue, maxReading) > 0)
+                maxReading = rawValue;
+            else if (Double.compare(rawValue, minReading) < 0)
+                minReading = rawValue;          
+        }
+                   
         /* Due to design of handlers, we have to create arraylist to
          * return both the minimum and maximum values.
          */
