@@ -2,3 +2,4 @@
 *.DS_Store
 /agriculture/nbproject/private/
 /agriculture/build/
+/agriculture/dist/
