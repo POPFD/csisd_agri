@@ -39,7 +39,14 @@ public class Agriculture {
         
         FieldStation fs1 = new FieldStation(1.234, -4.456, farm1);
         FieldStation fs2 = new FieldStation(1.234, -4.456, farm2);
+        
         SetOfFieldStations fieldStationList = new SetOfFieldStations();
+        fs2.addNewSensor(SensorType.TEMPERATURE);
+        fs2.addNewSensor(SensorType.BAROMETRIC);
+        fs2.addNewSensor(SensorType.RAINFALL);
+        fs1.addNewSensor(SensorType.TEMPERATURE);
+        fs1.addNewSensor(SensorType.BAROMETRIC);
+        fs1.addNewSensor(SensorType.RAINFALL);
         fieldStationList.add(fs1);
         fieldStationList.add(fs2);
                 
