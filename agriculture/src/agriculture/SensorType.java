@@ -10,8 +10,7 @@ package agriculture;
  * @author SaneetBhella
  */
 public enum SensorType {
-    Baromatic,
-    Temperature,
-    Pressure,
-    Rainfall
+    BAROMETRIC,
+    TEMPERATURE,
+    RAINFALL
 }

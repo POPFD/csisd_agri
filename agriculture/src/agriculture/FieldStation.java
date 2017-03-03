@@ -27,7 +27,7 @@ public class FieldStation {
     public FieldStation(Double lat, Double lng, Farm farm){
         //Creating unique ID every time
         this.fieldStationID = idCounter;
-        this.idCounter++;
+        idCounter++;
         
         this.fieldStationLocation = new Location(lat, lng);
         this.farmLocatedIn = farm;
@@ -36,13 +36,18 @@ public class FieldStation {
     public void updateLocation(Location location){
         this.fieldStationLocation = location;
     }
-    
-    public void getSesorData(){
-        //TODO: need to work on what the getSensor data returns
-    }
-    
+      
     public void addNewSensor(SensorType type){
-        //TODO: dont know how to add a sensor without a sensor being passed in as a parameter
+
+        /* Create new sensor and add to sensor monitor */
+        Sensor newSensor = new Sensor(fieldStationLocation.getLongitude(), 
+                                    fieldStationLocation.getLatitude(),
+                                    type);
+        
+        /* For new frequency is static */
+        SensorMonitor newMonitor = new SensorMonitor(1, newSensor);
+        
+        stationMonitors.add(newMonitor); 
     }
     
     public SetOfSensorMonitors getSensorMonitors(){

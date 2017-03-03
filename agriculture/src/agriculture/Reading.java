@@ -12,12 +12,11 @@ import java.util.Date;
  * @author SaneetBhella
  */
 public class Reading {
-    private Date timeStamp;
-    private Object readingValue;
-    private Location readingLocation;
+    private final Date timeStamp;
+    private final double readingValue;
+    private final Location readingLocation;
     
-    //got rid of createReading() 
-    public Reading(Date timeStamp, Object readingValue, Location readingLocation) {
+    public Reading(Date timeStamp, double readingValue, Location readingLocation) {
         this.timeStamp = timeStamp;
         this.readingValue = readingValue;
         this.readingLocation = readingLocation;
@@ -27,7 +26,7 @@ public class Reading {
        return timeStamp; 
     }
     
-    public Object getReadingValue() {
+    public double getReadingValue() {
         return readingValue;
     }
     
