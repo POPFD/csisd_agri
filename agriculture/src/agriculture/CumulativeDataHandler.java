@@ -7,15 +7,22 @@ package agriculture;
 
 /**
  *
- * @author student
+ * @author user
  */
 public class CumulativeDataHandler extends DataHandlerMethod {
     
-    private double cumulativeTotal;
+    private double cumulativeTotal = 0;
     
+    @Override
     public Reading handleRawData(Reading rawReading){
         
-        return 0;
+        cumulativeTotal += rawReading.getReadingValue();
+        
+        Reading procReading = new Reading(rawReading.getReadingTime(),
+                                            cumulativeTotal,
+                                            rawReading.getReadingLocation());
+        
+        return procReading;
         
     }
     
