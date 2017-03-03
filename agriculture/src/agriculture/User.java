@@ -15,18 +15,14 @@ public class User {
     private final String name;
     private final String password;
     
-    private SetOfFarmAccess permissions = null;
+    private SetOfFarmAccess permissions;
     
     public User(String username, String name, String password)
     {
         this.username = username;
         this.name = name;
-        this.password = password;
-    }
-    
-    public void setPermissions(SetOfFarmAccess newPerms)
-    {
-        permissions = newPerms;
+        this.password = password;     
+        this.permissions = new SetOfFarmAccess();
     }
     
     public SetOfFarmAccess getPermissions()

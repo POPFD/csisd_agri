@@ -18,19 +18,26 @@ public class Agriculture {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        
+        /* Create users and farms */
         User user = new User("john", "John Smith", "sheff");
-        Farm farm = new Farm("Sheffield Farm", "Sheffield 177 Road", user);
+        Farm farm1 = new Farm("Sheffield Farm", "Sheffield 177 Road", user);
         Farm farm2 = new Farm("Wales Farm", "Wales 455 Road", user);
         
         
+        /* Create farm access levels for user */
+        FarmAccess fa1 = new FarmAccess(farm1, AccessLevel.ReadWrite);
+        FarmAccess fa2 = new FarmAccess(farm2, AccessLevel.ReadOnly);
+        user.getPermissions().add(fa1);
+        user.getPermissions().add(fa2);
+        
         
         SetOfFarms setOfFarms = new SetOfFarms();
-        setOfFarms.add(farm);
+        setOfFarms.add(farm1);
         setOfFarms.add(farm2);
         
         
-        FieldStation fs1 = new FieldStation(1.234, -4.456, farm);
+        FieldStation fs1 = new FieldStation(1.234, -4.456, farm1);
         FieldStation fs2 = new FieldStation(1.234, -4.456, farm2);
         
         SetOfFieldStations fieldStationList = new SetOfFieldStations();
