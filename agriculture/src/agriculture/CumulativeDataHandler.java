@@ -11,12 +11,11 @@ package agriculture;
  */
 public class CumulativeDataHandler extends DataHandlerMethod {
     
-    private double cumulativeTotal = 0;
+    private Double cumulativeTotal = 0.0;
     
     @Override
     public Reading handleRawData(Reading rawReading){
-        
-        cumulativeTotal += rawReading.getReadingValue();
+        cumulativeTotal += (Double)rawReading.getReadingValue();
         
         Reading procReading = new Reading(rawReading.getReadingTime(),
                                             cumulativeTotal,

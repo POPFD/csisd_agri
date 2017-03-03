@@ -17,11 +17,11 @@ public class BarometricDataHandler extends DataHandlerMethod{
     public Reading handleRawData(Reading rawReading){
         
         
-        double readingVal = rawReading.getReadingValue();
+        Double readingVal = (Double)rawReading.getReadingValue();
         if (previousReading != null)
         {
             /* Take average of last reading and current */
-            readingVal += previousReading.getReadingValue();
+            readingVal += (Double)previousReading.getReadingValue();
             readingVal /= 2;
         }        
         
