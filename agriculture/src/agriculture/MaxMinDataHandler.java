@@ -41,8 +41,8 @@ public class MaxMinDataHandler extends DataHandlerMethod {
          * return both the minimum and maximum values.
          */
         ArrayList<Double> procValue = new ArrayList<Double>();
-        procValue.add(maxReading);
         procValue.add(minReading);
+        procValue.add(maxReading);
         
         Reading procReading = new Reading(rawReading.getReadingTime(),
                                             procValue,
