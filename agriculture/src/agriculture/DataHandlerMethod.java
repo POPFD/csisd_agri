@@ -13,8 +13,9 @@ public class DataHandlerMethod {
     
     public Reading handleRawData(Reading rawReading){
         
-        return 0;
+        /* Standard data handler just returns the original reading */    
         
+        return rawReading;   
     }
     
 }

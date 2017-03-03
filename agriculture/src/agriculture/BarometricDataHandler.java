@@ -11,12 +11,27 @@ package agriculture;
  */
 public class BarometricDataHandler extends DataHandlerMethod{
     
-    private Reading previousReading;
+    private Reading previousReading = null;
     
+    @Override
     public Reading handleRawData(Reading rawReading){
         
-        return 0;
         
+        Double readingVal = (Double)rawReading.getReadingValue();
+        if (previousReading != null)
+        {
+            /* Take average of last reading and current */
+            readingVal += (Double)previousReading.getReadingValue();
+            readingVal /= 2;
+        }        
+        
+        Reading procReading = new Reading(rawReading.getReadingTime(), 
+                                        readingVal, 
+                                        rawReading.getReadingLocation());
+              
+        /* Save last reading for next use */
+        previousReading = rawReading;
+        return procReading;       
     }
     
 }

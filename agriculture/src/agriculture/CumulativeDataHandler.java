@@ -7,15 +7,31 @@ package agriculture;
 
 /**
  *
- * @author student
+ * @author user
  */
 public class CumulativeDataHandler extends DataHandlerMethod {
     
-    private double cumulativeTotal;
+    private Double cumulativeTotal = 0.0;
+    private int tickCount = 0;
     
-    public Reading handleRawData(Reading rawReading){
+    @Override
+    public Reading handleRawData(Reading rawReading) {
         
-        return 0;
+        /* To simulate cumulative resetting after set amount of time */
+        if (tickCount >= 23)
+        {
+            cumulativeTotal = 0.0;
+            tickCount = 0;
+        }
+        
+        cumulativeTotal += (Double)rawReading.getReadingValue();
+        
+        Reading procReading = new Reading(rawReading.getReadingTime(),
+                                            cumulativeTotal,
+                                            rawReading.getReadingLocation());
+        
+        tickCount++;
+        return procReading;
         
     }
     
