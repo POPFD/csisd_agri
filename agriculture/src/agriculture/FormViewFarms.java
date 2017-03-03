@@ -16,22 +16,28 @@ import javax.swing.JFrame;
  */
 public class FormViewFarms extends javax.swing.JPanel {
     private final Server server;
+    private final User user;
     /**
      * Creates new form FieldStationForm
      * 
      * @param server
      */
-    public FormViewFarms(Server server) {
+    public FormViewFarms(Server server, User user) {
         initComponents();
         this.server = server;
+        this.user = user;
+        
         setFarmListBox();
     }
     
     public void setFarmListBox() {
+        
+        SetOfFarmAccess permissions = user.getPermissions();
+        
         List list = new ArrayList<String>();
-        for(int i = 0; i < server.getSetOfFarms().size(); i++) {
-            list.add(server.getSetOfFarms().get(i).getFarmName());
-            System.out.print(server.getSetOfFarms().get(i).getFarmName());
+        
+        for (FarmAccess perm: permissions) {
+            list.add(perm.getFarm().getFarmName());
         }
         
         farmList.setListData(list.toArray());
