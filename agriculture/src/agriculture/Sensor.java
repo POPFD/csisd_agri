@@ -72,20 +72,44 @@ public class Sensor {
     
     public Reading getReading()
     {
-        Date currDT = new Date();
-                
-        /* For now reading data is pseudo-random */
-        
-        //TODO: Fix so ranges are appropriate relating to sensor type
-        double startRange = 400;
-        double endRange = 402;
-        double random = new Random().nextDouble();
-        Double randomReading = startRange + (random * (endRange - startRange));
+        Date currDT = new Date();    
                         
-        rawReading = new Reading(currDT, randomReading, sensorLocation);
+        rawReading = new Reading(currDT, generateRandomReading(), sensorLocation);
         processedReading = handlerMethod.handleRawData(rawReading);
         
         return processedReading;
+    }
+    
+    
+    private Double generateRandomReading()
+    {
+        /* Generates a random reading to simulate how a sensor would work */
+        
+        double startRange = 0;
+        double endRange = 0;
+        switch(sensorType) 
+        {
+            case BAROMETRIC:
+            {
+                endRange = 100;
+                break;
+            }
+            
+            case TEMPERATURE:
+            {
+                endRange = 35;
+                break;
+            }
+            
+            case RAINFALL:
+            {
+                endRange = 20;
+                break;
+            }
+        }
+
+        double random = new Random().nextDouble();
+        return startRange + (random * (endRange - startRange));
     }
     
     
