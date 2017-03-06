@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 public class FormViewFarm extends javax.swing.JPanel {
     private final Server server;
     private final Farm farmSelected;
-    private final JFrame frame;
+    private final JFrame currentFrame;
     private final User user;
     /**
      * Creates new form viewFarmPage
@@ -26,7 +26,7 @@ public class FormViewFarm extends javax.swing.JPanel {
         initComponents();
         this.server = server;
         this.farmSelected = farmSelected;
-        this.frame = frame;
+        this.currentFrame = frame;
         this.user = user;
 
         setupFieldStationList();
@@ -387,24 +387,24 @@ public class FormViewFarm extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
-        int stationID = (int) fieldStationList.getSelectedValue();
-        
-        FieldStation station = server.getSetOfFieldStations().getFieldStationByID(stationID);
-        javax.swing.SwingUtilities.invokeLater(new Runnable() {
-                    public void run() {
-                        JFrame frame = new JFrame();
-                        FormFieldStation viewStation = new FormFieldStation(server, station, user, farmSelected, frame);              
-                        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                        frame.getContentPane().add(viewStation);
-                        frame.pack();
-                        frame.setVisible(true);
-                    }
-                });
+        if (fieldStationList.getSelectedIndex() != -1)
+        {
+            int stationID = (int) fieldStationList.getSelectedValue();
+
+            FieldStation station = server.getSetOfFieldStations().getFieldStationByID(stationID);
+
+            JFrame frame = new JFrame();
+            FormFieldStation viewStation = new FormFieldStation(server, station, user, farmSelected, frame);              
+            frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            frame.getContentPane().add(viewStation);
+            frame.pack();
+            frame.setVisible(true);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
-        frame.dispose();
+        currentFrame.dispose();
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnAddStationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddStationActionPerformed

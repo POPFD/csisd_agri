@@ -9,7 +9,7 @@ package agriculture;
  *
  * @author SaneetBhella
  */
-public class Location {
+public class Location implements java.io.Serializable {
     private double longitude;
     private double latitude;
     

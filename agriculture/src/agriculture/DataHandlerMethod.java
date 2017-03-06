@@ -9,7 +9,7 @@ package agriculture;
  *
  * @author student
  */
-public class DataHandlerMethod {
+public class DataHandlerMethod implements java.io.Serializable{
     
     public Reading handleRawData(Reading rawReading){
         

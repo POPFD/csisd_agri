@@ -11,7 +11,7 @@ import java.util.Date;
  *
  * @author user
  */
-public class SensorMonitor {
+public class SensorMonitor implements java.io.Serializable {
     
     private static int idCounter = 0;
     private final int monitorID;

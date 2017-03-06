@@ -11,7 +11,7 @@ import java.util.Date;
  *
  * @author SaneetBhella
  */
-public class Reading {
+public class Reading implements java.io.Serializable {
     private final Date timeStamp;
     private final Object readingValue;
     private final Location readingLocation;
