@@ -19,6 +19,9 @@ import static spark.Spark.*;
 public class RestEndpoints {
 
     public RestEndpoints(Server server) {
+        //sets port
+        setPort(8080);
+        
         //get list of farms
         get("/farms", (request, response) -> {
             response.header("Access-Control-Allow-Origin", "*");
@@ -33,7 +36,7 @@ public class RestEndpoints {
             return farms;
         }, json());
 
-        //get list of field stations
+        //get list of field stations for a farm
         get("/fieldStation/:farmName", (request, response) -> {
             response.header("Access-Control-Allow-Origin", "*");
             Farm farm = server.getSetOfFarms().getFarmByName(request.params(":farmName"));
@@ -57,7 +60,7 @@ public class RestEndpoints {
 
         }, json());
 
-        //get list of sensor monitors
+        //get list of sensor monitors for a fieldstation
         get("/sensorMonitor/:fieldStationId", (request, response) -> {
             response.header("Access-Control-Allow-Origin", "*");
             int fieldStationId = Integer.parseInt(request.params(":fieldStationId"));
@@ -113,10 +116,12 @@ public class RestEndpoints {
         }, json());
     }
 
+    //converts string to json
     public static String toJson(Object object) {
         return new Gson().toJson(object);
     }
 
+    //used to override spark java response transformer function
     public static ResponseTransformer json() {
         return RestEndpoints::toJson;
     }
