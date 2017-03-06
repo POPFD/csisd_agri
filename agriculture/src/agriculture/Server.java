@@ -9,7 +9,7 @@ package agriculture;
  *
  * @author sambowenhughes
  */
-public class Server {
+public class Server implements java.io.Serializable {
     public SetOfUsers setOfUsers;
     public SetOfFieldStations setOfFieldStations;
     public SetOfFarms setOfFarms;
@@ -37,17 +37,7 @@ public class Server {
     public void setSetOfFieldStations(SetOfFieldStations setOfFieldStations) {
         this.setOfFieldStations = setOfFieldStations;
     }
-    
-    
-    
-//    public SetOfReadings requestReadingsByarm(Farm farm){
-//        
-//    }
-//    
-//    public SetOfReadings returnReading() {
-//        
-//    }
-    
+       
     public User validateLogin(String username, String password) {
         User user = null;
         for(User u: setOfUsers) {
@@ -59,11 +49,7 @@ public class Server {
         }
         return user;
     }
-    
-//    public SetOfFieldStations getUserFieldStations(SetOfFarmAccess permissions) {
-//       
-//    }
-    
+       
     public boolean addFieldStation(double longitude, double latitude, String name) {
         Farm farm = setOfFarms.getFarmByName(name);
         if(farm != null) {

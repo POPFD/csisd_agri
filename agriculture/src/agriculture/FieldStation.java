@@ -10,7 +10,7 @@ package agriculture;
  * @author sambowenhughes
  */
 
-public class FieldStation {
+public class FieldStation implements java.io.Serializable {
     /* 
     Changed fieldStationID to private and final
     have also added a idCounter as an attribute for

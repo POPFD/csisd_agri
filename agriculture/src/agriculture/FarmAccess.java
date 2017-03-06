@@ -9,7 +9,7 @@ package agriculture;
  *
  * @author SaneetBhella
  */
-public class FarmAccess {
+public class FarmAccess implements java.io.Serializable {
     private Farm farm;
     private AccessLevel accessLevel;
     

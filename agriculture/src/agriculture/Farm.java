@@ -9,7 +9,7 @@ package agriculture;
  *
  * @author SaneetBhella
  */
-public class Farm {
+public class Farm implements java.io.Serializable {
    private int farmID;
    private String farmName;
    private String farmAddress;

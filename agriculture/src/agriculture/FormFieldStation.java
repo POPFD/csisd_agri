@@ -19,7 +19,7 @@ public class FormFieldStation extends javax.swing.JPanel {
     private  FieldStation station;
     private final User user;
     private final Farm farmSelected;
-    private JFrame frame;
+    private JFrame currentFrame;
     /**
      * Creates new form FieldStationForm
      */
@@ -29,7 +29,7 @@ public class FormFieldStation extends javax.swing.JPanel {
         this.station = station;
         this.user = user;
         this.farmSelected = farmSelected;
-        this.frame = frame;
+        this.currentFrame = frame;
     
         lblFarmName.setText(station.getFieldStationFarm().getFarmName());
         lblFieldStationID.setText(Integer.toString(station.getFieldStationID()));
@@ -261,21 +261,17 @@ public class FormFieldStation extends javax.swing.JPanel {
     }//GEN-LAST:event_btnViewSensorsActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        javax.swing.SwingUtilities.invokeLater(new Runnable() {
-                    public void run() {
-                        JFrame frame = new JFrame();
-                        FormAddSensor addSensor = new FormAddSensor(server, station, user, farmSelected, frame);
-                        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                        frame.getContentPane().add(addSensor);
-                        frame.pack();
-                        frame.setVisible(true);
-                    }
-                });
+        JFrame frame = new JFrame();
+        FormAddSensor addSensor = new FormAddSensor(server, station, user, farmSelected, frame);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.getContentPane().add(addSensor);
+        frame.pack();
+        frame.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
-        frame.dispose();
+        currentFrame.dispose();
     }//GEN-LAST:event_btnBackActionPerformed
 
 

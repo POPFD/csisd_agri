@@ -12,7 +12,7 @@ import java.util.Random;
  *
  * @author user
  */
-public class Sensor {
+public class Sensor implements java.io.Serializable {
     
     private static int idCounter = 0;
     private final int sensorID;

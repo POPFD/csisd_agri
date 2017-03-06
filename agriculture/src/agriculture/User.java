@@ -9,7 +9,7 @@ package agriculture;
  *
  * @author user
  */
-public class User {
+public class User implements java.io.Serializable {
     
     private final String username;
     private final String name;

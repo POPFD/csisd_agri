@@ -1,7 +1,6 @@
 package agriculture;
 
 import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -16,7 +15,7 @@ import javax.swing.SwingUtilities;
 public class FormLogin extends javax.swing.JPanel {
 
     private final Server server;
-    private final JFrame previousFrame;
+    private final JFrame currentFrame;
     
     /**
      * Creates new form GUI
@@ -27,7 +26,7 @@ public class FormLogin extends javax.swing.JPanel {
         initComponents();
         lblIncorrectLogin.setVisible(false);
         this.server = server;
-        previousFrame = frame;
+        currentFrame = frame;
     }
 
     /**
@@ -186,23 +185,16 @@ public class FormLogin extends javax.swing.JPanel {
         String username = txtFieldUsername.getText();
         String password = txtFieldPassword.getText();
         
-        if(username.length() != 0 && password.length() != 0) {
+        if (username.length() != 0 && password.length() != 0) {
             User user = server.validateLogin(username, password);
-            if(user != null) {
-                SwingUtilities.invokeLater(new Runnable() {
-                    public void run() {
-                        JFrame frame = new JFrame();
-                        FormViewFarms viewFarms = new FormViewFarms(server, user, frame);                        
-                        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                        frame.getContentPane().add(viewFarms);
-                        frame.pack();
-                        frame.setVisible(true);
-                        
-                        //hides previous form
-                        previousFrame.dispose();
-                    }
-                });
-            } else{
+            if (user != null) {
+                
+                FormViewFarms viewFarms = new FormViewFarms(server, user, currentFrame);
+                currentFrame.getContentPane().remove(this);
+                currentFrame.getContentPane().add(viewFarms);
+                currentFrame.pack();
+                
+            } else {
                 lblIncorrectLogin.setVisible(true);
             }
         }
