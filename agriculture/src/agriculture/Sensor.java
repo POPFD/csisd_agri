@@ -12,7 +12,7 @@ import java.util.Random;
  *
  * @author user
  */
-public class Sensor implements java.io.Serializable {
+public class Sensor implements java.io.Serializable, Subject {
     
     private static int idCounter = 0;
     private final int sensorID;
@@ -70,6 +70,11 @@ public class Sensor implements java.io.Serializable {
         sensorLocation = newLocation;
     }
     
+    public void initiateReading() {
+        getReading();
+        notifyObservers();
+    }
+    
     public Reading getReading()
     {
         Date currDT = new Date();    
@@ -111,7 +116,19 @@ public class Sensor implements java.io.Serializable {
         double random = new Random().nextDouble();
         return startRange + (random * (endRange - startRange));
     }
-    
-    
-    
+
+    @Override
+    public void registerObserver(Observer observer) {
+        if(observer != null) {
+            Server.getInstance().addObserver(observer);
+        }
+    }
+
+    @Override
+    public void notifyObservers() {
+        for(Observer observer: Server.getInstance().getObservers()) {
+            System.out.println(Server.getInstance().getObservers().size());
+            observer.update(this);
+        }
+    }
 }

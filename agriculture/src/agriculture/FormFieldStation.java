@@ -5,8 +5,6 @@
  */
 package agriculture;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
@@ -14,7 +12,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author SaneetBhella
  */
-public class FormFieldStation extends javax.swing.JPanel {
+public class FormFieldStation extends javax.swing.JPanel implements Observer {
     private final Server server;
     private  FieldStation station;
     private final User user;
@@ -246,18 +244,10 @@ public class FormFieldStation extends javax.swing.JPanel {
                 model.removeRow(i);
             }
         }
-        
-        
+                
         for(int i = 0; i < station.getSensorMonitors().size(); ++i){
-                model.addRow(new Object[]{
-                    station.getSensorMonitors().get(i).getID(),
-                    station.getSensorMonitors().get(i).getSensor().getType(),
-                    station.getSensorMonitors().get(i).getSensor().getReading().getReadingLocation().getLatitude(),
-                    station.getSensorMonitors().get(i).getSensor().getReading().getReadingLocation().getLongitude(),
-                    station.getSensorMonitors().get(i).getSensor().getReading().getReadingValue(),
-                    station.getSensorMonitors().get(i).getSensor().getReading().getReadingTime()
-                });
-        }   
+            station.getSensorMonitors().get(i).getSensor().initiateReading();
+        } 
     }//GEN-LAST:event_btnViewSensorsActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -294,4 +284,18 @@ public class FormFieldStation extends javax.swing.JPanel {
     private javax.swing.JLabel lblFieldStationID;
     private javax.swing.JLabel lblFieldStationID1;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void update(Sensor sensor) {
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        
+        model.addRow(new Object[]{
+            sensor.getID(),
+            sensor.getType(),
+            sensor.getReading().getReadingLocation().getLatitude(),
+            sensor.getReading().getReadingLocation().getLongitude(),
+            sensor.getReading().getReadingValue(),
+            sensor.getReading().getReadingTime()
+        });
+    }
 }
