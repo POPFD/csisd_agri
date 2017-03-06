@@ -5,6 +5,9 @@
  */
 package agriculture;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author SaneetBhella
@@ -12,14 +15,20 @@ package agriculture;
 public class FormAddSensor extends javax.swing.JPanel {
     private final Server server;
     private  FieldStation station;
+    private final User user;
+    private final Farm farmSelected;
+    private final JFrame frame;
     /**
      * Creates new form AddSensorForm
      */
-    public FormAddSensor(Server server, FieldStation station) {
+    public FormAddSensor(Server server, FieldStation station, User user, Farm farmSelected, JFrame frame) {
         initComponents();
         this.server = server;
         this.station = station;
-        
+        this.user = user;
+        this.farmSelected = farmSelected;
+        this.frame = frame;
+
         lblFarmName1.setText(station.getFieldStationFarm().getFarmName());
         lblFieldStationName1.setText(Integer.toString(station.getFieldStationID()));
         lblFieldStationID1.setText(Integer.toString(station.getFieldStationID()));
@@ -133,6 +142,11 @@ public class FormAddSensor extends javax.swing.JPanel {
         });
 
         btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -191,7 +205,7 @@ public class FormAddSensor extends javax.swing.JPanel {
                 .addGap(31, 31, 31)
                 .addComponent(lblAddSensor)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel11)
                     .addComponent(cBoxType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -202,6 +216,22 @@ public class FormAddSensor extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        
+        //go through users' farm access
+            SetOfFarmAccess permissions = user.getPermissions();
+            for(FarmAccess access : permissions) {
+                if(access.getFarm() == farmSelected) {
+                    //check they have read and write access
+                    if(access.getAccessLevel() == AccessLevel.ReadWrite) {
+                        System.out.println("Allowed to edit");
+                    } else {
+                        System.out.println("Not allowed to edit");
+                        JOptionPane.showMessageDialog(null, "You do not have permission to edit this farm.");
+                        return;
+                    }
+                }
+            }
+
         
         switch (cBoxType.getSelectedItem().toString())
         {
@@ -223,6 +253,11 @@ public class FormAddSensor extends javax.swing.JPanel {
         }
         
     }//GEN-LAST:event_btnAddActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        frame.dispose();
+    }//GEN-LAST:event_btnBackActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

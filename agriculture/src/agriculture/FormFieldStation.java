@@ -17,13 +17,19 @@ import javax.swing.table.DefaultTableModel;
 public class FormFieldStation extends javax.swing.JPanel {
     private final Server server;
     private  FieldStation station;
+    private final User user;
+    private final Farm farmSelected;
+    private JFrame frame;
     /**
      * Creates new form FieldStationForm
      */
-    public FormFieldStation(Server server, FieldStation station) {
+    public FormFieldStation(Server server, FieldStation station, User user, Farm farmSelected, JFrame frame) {
         initComponents();
         this.server = server;
         this.station = station;
+        this.user = user;
+        this.farmSelected = farmSelected;
+        this.frame = frame;
     
         lblFarmName.setText(station.getFieldStationFarm().getFarmName());
         lblFieldStationID.setText(Integer.toString(station.getFieldStationID()));
@@ -90,6 +96,11 @@ public class FormFieldStation extends javax.swing.JPanel {
         lblFarmName.setText("lblFarmName");
 
         btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
         lblFieldStationID.setText("lblFieldStationID");
 
@@ -252,15 +263,20 @@ public class FormFieldStation extends javax.swing.JPanel {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
                     public void run() {
-                        FormAddSensor addSensor = new FormAddSensor(server, station);
                         JFrame frame = new JFrame();
-                        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                        FormAddSensor addSensor = new FormAddSensor(server, station, user, farmSelected, frame);
+                        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                         frame.getContentPane().add(addSensor);
                         frame.pack();
                         frame.setVisible(true);
                     }
                 });
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        frame.dispose();
+    }//GEN-LAST:event_btnBackActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -191,8 +191,8 @@ public class FormLogin extends javax.swing.JPanel {
             if(user != null) {
                 SwingUtilities.invokeLater(new Runnable() {
                     public void run() {
-                        FormViewFarms viewFarms = new FormViewFarms(server, user);
                         JFrame frame = new JFrame();
+                        FormViewFarms viewFarms = new FormViewFarms(server, user, frame);                        
                         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                         frame.getContentPane().add(viewFarms);
                         frame.pack();

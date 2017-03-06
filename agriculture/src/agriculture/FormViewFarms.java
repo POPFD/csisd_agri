@@ -17,15 +17,17 @@ import javax.swing.JFrame;
 public class FormViewFarms extends javax.swing.JPanel {
     private final Server server;
     private final User user;
+    private final JFrame frame;
     /**
      * Creates new form FieldStationForm
      * 
      * @param server
      */
-    public FormViewFarms(Server server, User user) {
+    public FormViewFarms(Server server, User user, JFrame frame) {
         initComponents();
         this.server = server;
         this.user = user;
+        this.frame = frame;
         
         setFarmListBox();
     }
@@ -191,8 +193,8 @@ public class FormViewFarms extends javax.swing.JPanel {
             Farm farm = server.getSetOfFarms().getFarmByName(farmSelected);
             javax.swing.SwingUtilities.invokeLater(new Runnable() {
                     public void run() {
-                        FormViewFarm viewFarm = new FormViewFarm(server, farm);
                         JFrame frame = new JFrame();
+                        FormViewFarm viewFarm = new FormViewFarm(server, user, farm, frame);
                         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                         frame.getContentPane().add(viewFarm);
                         frame.pack();
@@ -204,6 +206,17 @@ public class FormViewFarms extends javax.swing.JPanel {
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
         //to implement
+        frame.dispose();
+        javax.swing.SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                JFrame frame = new JFrame();
+                FormLogin loginForm = new FormLogin(server, frame);
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.getContentPane().add(loginForm);
+                frame.pack();
+                frame.setVisible(true);
+            }
+        });
     }//GEN-LAST:event_btnLogoutActionPerformed
 
 
