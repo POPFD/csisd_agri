@@ -58,6 +58,9 @@ public class Agriculture {
         server.setSetOfFarms(setOfFarms);
         server.setSetOfFieldStations(fieldStationList);
         
+        //sets up the REST endpoints
+        new RestEndpoints(server);
+        
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 
