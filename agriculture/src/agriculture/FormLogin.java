@@ -179,21 +179,24 @@ public class FormLogin extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        // TODO add your handling code here:
         lblIncorrectLogin.setVisible(false);
         
         String username = txtFieldUsername.getText();
         String password = txtFieldPassword.getText();
         
+        //check user has entered username and password
         if (username.length() != 0 && password.length() != 0) {
+            
+            //start validation
             User user = server.validateLogin(username, password);
+            
+            //user exits
             if (user != null) {
-                
+                //start view farms form
                 FormViewFarms viewFarms = new FormViewFarms(server, user, currentFrame);
                 currentFrame.getContentPane().remove(this);
                 currentFrame.getContentPane().add(viewFarms);
                 currentFrame.pack();
-                
             } else {
                 lblIncorrectLogin.setVisible(true);
             }
@@ -201,7 +204,7 @@ public class FormLogin extends javax.swing.JPanel {
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void clearLabel(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_clearLabel
-        // TODO add your handling code here:
+        //clears incorrect login message on text input change
         lblIncorrectLogin.setVisible(false);
     }//GEN-LAST:event_clearLabel
 

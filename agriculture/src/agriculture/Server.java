@@ -17,11 +17,16 @@ public class Server implements java.io.Serializable {
     private SetOfFieldStations setOfFieldStations;
     private SetOfFarms setOfFarms;
     
+    //used in singleton pattern
     private static Server serverInstance = null;
+    
+    //used in observer pattern
     private List<Observer> observers = new ArrayList<Observer>();
     
+    //private constructor so only on instantiation
     private Server() {}
     
+    //function to get the server instance
     public static Server getInstance() {
         synchronized(Server.class) {
             if(serverInstance == null) {

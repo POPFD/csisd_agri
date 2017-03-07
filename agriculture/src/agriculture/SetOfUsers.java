@@ -35,6 +35,7 @@ public class SetOfUsers extends ArrayList<User> implements Serializable {
         super.remove(user);
     }
     
+    //returns a user by by username
     public User getUserByUsername(String username)
     {
         User result = null;

@@ -117,6 +117,7 @@ public class Sensor implements java.io.Serializable, Subject {
         return startRange + (random * (endRange - startRange));
     }
 
+    //register the sensor to list of observerables
     @Override
     public void registerObserver(Observer observer) {
         if(observer != null) {
@@ -124,10 +125,10 @@ public class Sensor implements java.io.Serializable, Subject {
         }
     }
 
+    //notifiy observers to update this sensor on the view
     @Override
     public void notifyObservers() {
         for(Observer observer: Server.getInstance().getObservers()) {
-            System.out.println(Server.getInstance().getObservers().size());
             observer.update(this);
         }
     }

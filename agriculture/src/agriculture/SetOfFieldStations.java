@@ -24,6 +24,7 @@ public class SetOfFieldStations extends ArrayList<FieldStation> {
         super.remove(station);
     }
     
+    //get field station by id
     public FieldStation getFieldStationByID(int id){
         FieldStation station = null;
         for(FieldStation s: this) {
@@ -34,6 +35,7 @@ public class SetOfFieldStations extends ArrayList<FieldStation> {
         return station;
     }
     
+    //get field station by location
     public FieldStation getFieldStationByLocation(Location location){
         FieldStation station = null;
         for(FieldStation s: this) {
@@ -44,6 +46,7 @@ public class SetOfFieldStations extends ArrayList<FieldStation> {
         return station;
     }
     
+    //gets field station by farm name
     public FieldStation getFieldStationByFarmName(String farmname){
         FieldStation station = null;
         for(FieldStation s: this) {
@@ -55,6 +58,7 @@ public class SetOfFieldStations extends ArrayList<FieldStation> {
         return station;
     }
     
+    //get set of field stations by farn name
     public SetOfFieldStations getSetOfFieldStationsByName(String farmname){
         SetOfFieldStations list = new SetOfFieldStations();
         for(FieldStation f: this) {

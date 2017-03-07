@@ -7,7 +7,6 @@ package agriculture;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 
 /**
@@ -22,6 +21,8 @@ public class FormViewFarms extends javax.swing.JPanel {
      * Creates new form FieldStationForm
      * 
      * @param server
+     * @param user
+     * @param frame
      */
     public FormViewFarms(Server server, User user, JFrame frame) {
         initComponents();
@@ -29,19 +30,17 @@ public class FormViewFarms extends javax.swing.JPanel {
         this.user = user;
         this.currentFrame = frame;
         
+        //setup farm list
         setFarmListBox();
     }
     
     public void setFarmListBox() {
-        
+        //setup list of farms to view based on user permission
         SetOfFarmAccess permissions = user.getPermissions();
-        
         List list = new ArrayList<String>();
-        
         for (FarmAccess perm: permissions) {
             list.add(perm.getFarm().getFarmName());
         }
-        
         farmList.setListData(list.toArray());
     }
 
@@ -184,7 +183,7 @@ public class FormViewFarms extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void farmViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_farmViewActionPerformed
-        // TODO add your handling code her
+        //get selected value from farm list and view that farms fieldstation
         String farmSelected = (String) farmList.getSelectedValue();
         if(farmSelected == null){
             errorLbl.setText("Please select a farm from the list");
@@ -202,7 +201,7 @@ public class FormViewFarms extends javax.swing.JPanel {
     }//GEN-LAST:event_farmViewActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
-        //to implement
+        //logout function, closes current form and returns to login page
         currentFrame.dispose();
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {

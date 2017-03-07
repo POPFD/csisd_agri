@@ -14,12 +14,17 @@ import javax.swing.table.DefaultTableModel;
  */
 public class FormFieldStation extends javax.swing.JPanel implements Observer {
     private final Server server;
-    private  FieldStation station;
+    private final FieldStation station;
     private final User user;
     private final Farm farmSelected;
-    private JFrame currentFrame;
+    private final JFrame currentFrame;
     /**
      * Creates new form FieldStationForm
+     * @param server
+     * @param station
+     * @param user
+     * @param frame
+     * @param farmSelected
      */
     public FormFieldStation(Server server, FieldStation station, User user, Farm farmSelected, JFrame frame) {
         initComponents();
@@ -29,6 +34,7 @@ public class FormFieldStation extends javax.swing.JPanel implements Observer {
         this.farmSelected = farmSelected;
         this.currentFrame = frame;
     
+        //setup form elements
         lblFarmName.setText(station.getFieldStationFarm().getFarmName());
         lblFieldStationID.setText(Integer.toString(station.getFieldStationID()));
     }
@@ -233,10 +239,10 @@ public class FormFieldStation extends javax.swing.JPanel implements Observer {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnViewSensorsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewSensorsActionPerformed
-
+        //get table reference
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         
-        /* Clear existing items from model */
+        /* Clear existing items from table */
         if (model.getRowCount() > 0)
         {
             for (int i = model.getRowCount() - 1; i > -1; i--)
@@ -245,12 +251,14 @@ public class FormFieldStation extends javax.swing.JPanel implements Observer {
             }
         }
                 
+        //for each sensor in this fieldstation, initiate get readings
         for(int i = 0; i < station.getSensorMonitors().size(); ++i){
             station.getSensorMonitors().get(i).getSensor().initiateReading();
         } 
     }//GEN-LAST:event_btnViewSensorsActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        //opens add sensor form
         JFrame frame = new JFrame();
         FormAddSensor addSensor = new FormAddSensor(server, station, user, farmSelected, frame);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -260,7 +268,7 @@ public class FormFieldStation extends javax.swing.JPanel implements Observer {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        // TODO add your handling code here:
+        //close current frame on back button press
         currentFrame.dispose();
     }//GEN-LAST:event_btnBackActionPerformed
 
@@ -285,10 +293,13 @@ public class FormFieldStation extends javax.swing.JPanel implements Observer {
     private javax.swing.JLabel lblFieldStationID1;
     // End of variables declaration//GEN-END:variables
 
+    //observer design pattern implementation
     @Override
     public void update(Sensor sensor) {
+        //get table reference
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         
+        //add sensor reading to table
         model.addRow(new Object[]{
             sensor.getID(),
             sensor.getType(),
