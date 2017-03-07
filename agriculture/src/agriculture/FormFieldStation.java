@@ -84,7 +84,7 @@ public class FormFieldStation extends javax.swing.JPanel implements Observer {
         jLabel4.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel4.setText("Fieldstation ID:");
 
-        btnViewSensors.setText("View Sensors");
+        btnViewSensors.setText("Get Readings");
         btnViewSensors.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnViewSensorsActionPerformed(evt);

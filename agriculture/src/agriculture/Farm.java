@@ -10,7 +10,8 @@ package agriculture;
  * @author SaneetBhella
  */
 public class Farm implements java.io.Serializable {
-   private int farmID;
+   private static int idCounter = 0;
+   private int farmID = 0;
    private String farmName;
    private String farmAddress;
    
@@ -18,6 +19,8 @@ public class Farm implements java.io.Serializable {
    private User farmOwner;
    
    public Farm(String farmName, String farmAddress, User farmOwner) {
+       this.farmID = idCounter;
+       idCounter++;
        this.farmName = farmName;
        this.farmAddress = farmAddress;
        this.farmOwner = farmOwner;
