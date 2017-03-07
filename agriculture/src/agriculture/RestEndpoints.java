@@ -6,7 +6,10 @@
 package agriculture;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import java.util.ArrayList;
 import java.util.List;
 import spark.ResponseTransformer;
@@ -19,7 +22,7 @@ import static spark.Spark.*;
 public class RestEndpoints {
 
     public RestEndpoints(Server server) {
-        //sets port
+        //port to run on
         setPort(8080);
         
         //get list of farms
@@ -80,7 +83,7 @@ public class RestEndpoints {
 
             response.status(400);
             JsonObject jsonObj = new JsonObject();
-            jsonObj.addProperty("message", "No sensor monitors found for fieldstation: " + fieldStationId);
+            jsonObj.addProperty("message", "No sensor monitors found for fieldstation ID: " + fieldStationId);
             return jsonObj;
 
         }, json());
@@ -115,14 +118,17 @@ public class RestEndpoints {
 
         }, json());
     }
-
-    //converts string to json
-    public static String toJson(Object object) {
-        return new Gson().toJson(object);
-    }
-
-    //used to override spark java response transformer function
+    
+    //used to override spark java response transformer function, calls toJson function instead
     public static ResponseTransformer json() {
         return RestEndpoints::toJson;
     }
+
+    //returns json to client
+    public static String toJson(Object object) {
+        JsonParser parser = new JsonParser();
+        JsonElement jsonTree = parser.parse(object.toString());
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        return gson.toJson(jsonTree);
+    }  
 }
