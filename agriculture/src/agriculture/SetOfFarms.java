@@ -25,6 +25,7 @@ public class SetOfFarms extends ArrayList<Farm> {
         super.remove(farm);
     }
     
+    //function to get farm by exact name
     public Farm getFarmByName(String farmName) {
         Farm farm = null;
         for(Farm f: this) {
@@ -35,6 +36,7 @@ public class SetOfFarms extends ArrayList<Farm> {
         return farm;
     }
     
+    //function to get farm by id
     public Farm getFarmByID(int id) {
         Farm farm = null;
         for(Farm f: this) {

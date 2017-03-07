@@ -10,5 +10,6 @@ package agriculture;
  * @author SaneetBhella
  */
 public interface Observer {
+    //observer design pattern interface
     public void update(Sensor sensor);
 }

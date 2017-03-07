@@ -32,6 +32,7 @@ public class Agriculture {
         //sets up the REST endpoints
         new RestEndpoints(server);
         
+        //launches login form
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 

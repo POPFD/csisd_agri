@@ -14,8 +14,7 @@ public class User implements java.io.Serializable {
     private final String username;
     private final String name;
     private final String password;
-    
-    private SetOfFarmAccess permissions;
+    private final SetOfFarmAccess permissions;
     
     public User(String username, String name, String password)
     {
@@ -34,7 +33,6 @@ public class User implements java.io.Serializable {
     {
         return password.equals(inputPass);
     }
-    
     
     public String getUsername()
     {
