@@ -7,12 +7,13 @@ package agriculture;
 
 import java.util.Date;
 import java.util.Random;
+import java.util.Observable;
 
 /**
  *
  * @author user
  */
-public class Sensor implements java.io.Serializable, Subject {
+public class Sensor extends Observable implements java.io.Serializable {
     
     private static int idCounter = 0;
     private final int sensorID;
@@ -20,8 +21,7 @@ public class Sensor implements java.io.Serializable, Subject {
     private SensorType sensorType;
     private Location sensorLocation;
     private DataHandlerMethod handlerMethod = null;
-    private Reading processedReading;
-    private Reading rawReading;
+    private Reading lastReading = null;
     
     public Sensor(double longitude, double latitude, SensorType sensType)
     {   
@@ -65,26 +65,32 @@ public class Sensor implements java.io.Serializable, Subject {
         return sensorType;
     }
     
+    public Reading getLastReading()
+    {
+        return lastReading;
+    }
+    
     public void updateLocation(Location newLocation)
     {
         sensorLocation = newLocation;
     }
     
     public void initiateReading() {
-        getReading();
-        notifyObservers();
+        lastReading = getReading();
+        
+        setChanged();
+        notifyObservers(lastReading);
     }
     
-    public Reading getReading()
+    private Reading getReading()
     {
         Date currDT = new Date();    
                         
-        rawReading = new Reading(currDT, generateRandomReading(), sensorLocation);
-        processedReading = handlerMethod.handleRawData(rawReading);
+        Reading rawReading = new Reading(currDT, generateRandomReading(), sensorLocation);
+        Reading processedReading = handlerMethod.handleRawData(rawReading);
         
         return processedReading;
     }
-    
     
     private Double generateRandomReading()
     {
@@ -115,20 +121,5 @@ public class Sensor implements java.io.Serializable, Subject {
 
         double random = new Random().nextDouble();
         return startRange + (random * (endRange - startRange));
-    }
-
-    @Override
-    public void registerObserver(Observer observer) {
-        if(observer != null) {
-            Server.getInstance().addObserver(observer);
-        }
-    }
-
-    @Override
-    public void notifyObservers() {
-        for(Observer observer: Server.getInstance().getObservers()) {
-            System.out.println(Server.getInstance().getObservers().size());
-            observer.update(this);
-        }
     }
 }

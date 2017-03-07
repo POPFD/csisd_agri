@@ -7,6 +7,9 @@ package agriculture;
 
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
+import java.util.Observer;
+import java.util.Observable;
+
 
 /**
  *
@@ -30,7 +33,24 @@ public class FormFieldStation extends javax.swing.JPanel implements Observer {
         this.currentFrame = frame;
     
         lblFarmName.setText(station.getFieldStationFarm().getFarmName());
-        lblFieldStationID.setText(Integer.toString(station.getFieldStationID()));
+        lblFieldStationID.setText(Integer.toString(station.getFieldStationID()));      
+    }
+    
+    @Override
+    public void update(Observable o, Object arg) {
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        
+        Sensor callee = (Sensor)o;
+        Reading newReading = (Reading)arg;
+        
+        model.addRow(new Object[]{
+            callee.getID(),
+            callee.getType(),
+            newReading.getReadingLocation().getLatitude(),
+            newReading.getReadingLocation().getLongitude(),
+            newReading.getReadingValue(),
+            newReading.getReadingTime()
+        });
     }
 
     /**
@@ -237,16 +257,18 @@ public class FormFieldStation extends javax.swing.JPanel implements Observer {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         
         /* Clear existing items from model */
-        if (model.getRowCount() > 0)
-        {
-            for (int i = model.getRowCount() - 1; i > -1; i--)
-            {
-                model.removeRow(i);
-            }
-        }
-                
-        for(int i = 0; i < station.getSensorMonitors().size(); ++i){
-            station.getSensorMonitors().get(i).getSensor().initiateReading();
+        model.setRowCount(0);
+              
+        for(int i = 0; i < station.getSensorMonitors().size(); ++i) {
+            
+            SensorMonitor sensMon = station.getSensorMonitors().get(i);
+            Sensor sensor = sensMon.getSensor();
+            
+            /* Add ourself as an observer if not already done */
+            if (sensor.countObservers() == 0) 
+                sensor.addObserver(this);
+            
+            sensor.initiateReading();
         } 
     }//GEN-LAST:event_btnViewSensorsActionPerformed
 
@@ -284,18 +306,5 @@ public class FormFieldStation extends javax.swing.JPanel implements Observer {
     private javax.swing.JLabel lblFieldStationID;
     private javax.swing.JLabel lblFieldStationID1;
     // End of variables declaration//GEN-END:variables
-
-    @Override
-    public void update(Sensor sensor) {
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        
-        model.addRow(new Object[]{
-            sensor.getID(),
-            sensor.getType(),
-            sensor.getReading().getReadingLocation().getLatitude(),
-            sensor.getReading().getReadingLocation().getLongitude(),
-            sensor.getReading().getReadingValue(),
-            sensor.getReading().getReadingTime()
-        });
-    }
+  
 }

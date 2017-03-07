@@ -18,7 +18,6 @@ public class Server implements java.io.Serializable {
     private SetOfFarms setOfFarms;
     
     private static Server serverInstance = null;
-    private List<Observer> observers = new ArrayList<Observer>();
     
     private Server() {}
     
@@ -30,18 +29,6 @@ public class Server implements java.io.Serializable {
         }
         
         return serverInstance;
-    }
-
-    public List<Observer> getObservers() {
-        return observers;
-    }
-
-    public void setObservers(List<Observer> observers) {
-        this.observers = observers;
-    }
-    
-    public void addObserver(Observer observer) {
-        observers.add(observer);
     }
 
     public SetOfUsers getSetOfUsers() {
@@ -91,9 +78,17 @@ public class Server implements java.io.Serializable {
         return false;
     }
     
-    public void addSensor(double longitude, double latitude, SensorType type) {
+    public boolean addSensor(double longitude, double latitude, SensorType type) {
+        boolean result = false;
+        
         Location location = new Location(longitude, latitude);
         FieldStation fieldStation = setOfFieldStations.getFieldStationByLocation(location);
-        fieldStation.addNewSensor(type);
+        if (fieldStation != null)
+        {
+            fieldStation.addNewSensor(type);
+            result = true;
+        }
+        
+        return result;
     }
 }
