@@ -5,14 +5,44 @@
  */
 package agriculture;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author sambowenhughes
  */
 public class Server implements java.io.Serializable {
-    public SetOfUsers setOfUsers;
-    public SetOfFieldStations setOfFieldStations;
-    public SetOfFarms setOfFarms;
+    private SetOfUsers setOfUsers;
+    private SetOfFieldStations setOfFieldStations;
+    private SetOfFarms setOfFarms;
+    
+    private static Server serverInstance = null;
+    private List<Observer> observers = new ArrayList<Observer>();
+    
+    private Server() {}
+    
+    public static Server getInstance() {
+        synchronized(Server.class) {
+            if(serverInstance == null) {
+                serverInstance = new Server();
+            } 
+        }
+        
+        return serverInstance;
+    }
+
+    public List<Observer> getObservers() {
+        return observers;
+    }
+
+    public void setObservers(List<Observer> observers) {
+        this.observers = observers;
+    }
+    
+    public void addObserver(Observer observer) {
+        observers.add(observer);
+    }
 
     public SetOfUsers getSetOfUsers() {
         return setOfUsers;

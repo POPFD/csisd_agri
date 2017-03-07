@@ -102,7 +102,7 @@ public class Persistence {
         SetOfUsers setOfusers = new SetOfUsers();
         setOfusers.add(user);
                 
-        Server server = new Server();
+        Server server = Server.getInstance();
         server.setSetOfUsers(setOfusers);
         server.setSetOfFarms(setOfFarms);
         server.setSetOfFieldStations(fieldStationList); 
