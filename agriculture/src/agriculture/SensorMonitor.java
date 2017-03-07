@@ -6,33 +6,39 @@
 package agriculture;
 
 import java.util.Date;
+import java.util.Observer;
+import java.util.Observable;
 
 /**
  *
  * @author user
  */
-public class SensorMonitor implements java.io.Serializable {
+public class SensorMonitor implements java.io.Serializable, Observer {
     
     private static int idCounter = 0;
     private final int monitorID;
 
     private final Sensor sensor;
-    private final SetOfReadings readings;
-    //private double readingFrequency;
-    //private Date lastReading;
+    private final SetOfReadings readings;  
+    private int frequency;
     
-    
-    public SensorMonitor(double frequency, Sensor sens) {
+    public SensorMonitor(int updateFrequency, Sensor sens) {
         
         this.monitorID = idCounter;
         idCounter++;
         
         this.sensor = sens;
-        
-        /* Removing reading frequency for now as does not seem to be needed */
-        //this.readingFrequency = frequency;
-        
-        this.readings = new SetOfReadings();       
+        this.sensor.addObserver(this);
+               
+        this.readings = new SetOfReadings();      
+        this.frequency = updateFrequency;
+    }
+    
+    @Override
+    public void update(Observable o, Object arg) {
+
+        Reading newReading = (Reading)arg;
+        readings.add(newReading);
     }
     
     public int getID() {
@@ -40,25 +46,31 @@ public class SensorMonitor implements java.io.Serializable {
     }
     
     public Sensor getSensor() {
-        return sensor;
-    }
-    
-    
-    /* No need to have takeReadingIfRequired as that function did nothing else */
-    public void requestReading() {
-        Reading processedReading = sensor.getReading();
         
         /* 
-         * No need for updateReadings as it would be
-         * a one line function otherwise. We may as well 
-         * add directly to SetOfReadings.
+         * Add ourself as observer if not already there.
+         * This is to fix problem with serialisation losing observers.
          */
-        readings.add(processedReading);
+        if (sensor.countObservers() == 0)
+            sensor.addObserver(this);
+        
+        return sensor;
     }
-    
+        
     /* Was postReadings in diagram, changed to be more explanatory */
     public SetOfReadings getReadings() {
         return readings;
     }
     
+    public Reading getLastReading() {
+        Reading result = null;
+        
+        if ((readings != null) && (readings.isEmpty() == false))
+        {
+            result = readings.get(readings.size() - 1);
+        }
+        
+        return result;
+    }
+       
 }

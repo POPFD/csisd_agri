@@ -21,7 +21,6 @@ public class Sensor extends Observable implements java.io.Serializable {
     private SensorType sensorType;
     private Location sensorLocation;
     private DataHandlerMethod handlerMethod = null;
-    private Reading lastReading = null;
     
     public Sensor(double longitude, double latitude, SensorType sensType)
     {   
@@ -64,34 +63,22 @@ public class Sensor extends Observable implements java.io.Serializable {
     {
         return sensorType;
     }
-    
-    public Reading getLastReading()
-    {
-        return lastReading;
-    }
-    
+       
     public void updateLocation(Location newLocation)
     {
         sensorLocation = newLocation;
     }
     
-    public void initiateReading() {
-        lastReading = getReading();
-        
-        setChanged();
-        notifyObservers(lastReading);
-    }
-    
-    private Reading getReading()
-    {
+    public void initiateReading() {     
         Date currDT = new Date();    
                         
         Reading rawReading = new Reading(currDT, generateRandomReading(), sensorLocation);
-        Reading processedReading = handlerMethod.handleRawData(rawReading);
+        Reading processedReading = handlerMethod.handleRawData(rawReading);    
         
-        return processedReading;
+        setChanged();
+        notifyObservers(processedReading);
     }
-    
+       
     private Double generateRandomReading()
     {
         /* Generates a random reading to simulate how a sensor would work */

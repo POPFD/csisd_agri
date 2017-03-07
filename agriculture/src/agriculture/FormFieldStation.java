@@ -7,15 +7,12 @@ package agriculture;
 
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
-import java.util.Observer;
-import java.util.Observable;
-
 
 /**
  *
  * @author SaneetBhella
  */
-public class FormFieldStation extends javax.swing.JPanel implements Observer {
+public class FormFieldStation extends javax.swing.JPanel {
     private final Server server;
     private  FieldStation station;
     private final User user;
@@ -36,23 +33,6 @@ public class FormFieldStation extends javax.swing.JPanel implements Observer {
         lblFieldStationID.setText(Integer.toString(station.getFieldStationID()));      
     }
     
-    @Override
-    public void update(Observable o, Object arg) {
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        
-        Sensor callee = (Sensor)o;
-        Reading newReading = (Reading)arg;
-        
-        model.addRow(new Object[]{
-            callee.getID(),
-            callee.getType(),
-            newReading.getReadingLocation().getLatitude(),
-            newReading.getReadingLocation().getLongitude(),
-            newReading.getReadingValue(),
-            newReading.getReadingTime()
-        });
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -264,11 +244,26 @@ public class FormFieldStation extends javax.swing.JPanel implements Observer {
             SensorMonitor sensMon = station.getSensorMonitors().get(i);
             Sensor sensor = sensMon.getSensor();
             
-            /* Add ourself as an observer if not already done */
-            if (sensor.countObservers() == 0) 
-                sensor.addObserver(this);
-            
+            /* 
+             * As sensors are not running updating at different 
+             * times we have to initiate a reading manually.
+             */
             sensor.initiateReading();
+            
+            Reading lastReading = sensMon.getLastReading();
+            
+            /* Check to make sure there are actually readings there */
+            if (lastReading != null)
+            {                
+                model.addRow(new Object[]{
+                    sensor.getID(),
+                    sensor.getType(),
+                    lastReading.getReadingLocation().getLatitude(),
+                    lastReading.getReadingLocation().getLongitude(),
+                    lastReading.getReadingValue(),
+                    lastReading.getReadingTime()
+                });
+            }  
         } 
     }//GEN-LAST:event_btnViewSensorsActionPerformed
 

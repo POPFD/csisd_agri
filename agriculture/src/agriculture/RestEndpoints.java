@@ -99,12 +99,19 @@ public class RestEndpoints {
                 
                 List<String> readings = new ArrayList<String>();
                 for(SensorMonitor sensorMonitor: setOfSensorMonitors) {
+                    Sensor sensor = sensorMonitor.getSensor();
+                    
+                    /* Manually have to initiate a reading now */
+                    sensor.initiateReading();
+                    
+                    Reading lastReading = sensorMonitor.getLastReading();
+                    
                     JsonObject jsonObj = new JsonObject();
-                    jsonObj.addProperty("sensorType", sensorMonitor.getSensor().getType().toString());
-                    jsonObj.addProperty("sensorReading", sensorMonitor.getSensor().getReading().getReadingValue().toString());
-                    jsonObj.addProperty("readingTime", sensorMonitor.getSensor().getReading().getReadingTime().toString());
-                    jsonObj.addProperty("latitude", sensorMonitor.getSensor().getReading().getReadingLocation().getLatitude());
-                    jsonObj.addProperty("longitude", sensorMonitor.getSensor().getReading().getReadingLocation().getLongitude());
+                    jsonObj.addProperty("sensorType", sensor.getType().toString());
+                    jsonObj.addProperty("sensorReading", lastReading.getReadingValue().toString());
+                    jsonObj.addProperty("readingTime", lastReading.getReadingTime().toString());
+                    jsonObj.addProperty("latitude",lastReading.getReadingLocation().getLatitude());
+                    jsonObj.addProperty("longitude", lastReading.getReadingLocation().getLongitude());
                     
                     readings.add(jsonObj.toString());
                 }
