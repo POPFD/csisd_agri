@@ -41,7 +41,7 @@ public class RestEndpoints {
         }, json());
 
         //get list of field stations for a farm
-        get("/fieldStation/:farmName", (request, response) -> {
+        get("/fieldStations/:farmName", (request, response) -> {
             response.type("application/json");
             response.header("Access-Control-Allow-Origin", "*");
             Farm farm = server.getSetOfFarms().getFarmByName(request.params(":farmName"));
@@ -66,7 +66,7 @@ public class RestEndpoints {
         }, json());
 
         //get list of sensor monitors for a fieldstation
-        get("/sensorMonitor/:fieldStationId", (request, response) -> {
+        get("/sensorMonitors/:fieldStationId", (request, response) -> {
             response.type("application/json");
             response.header("Access-Control-Allow-Origin", "*");
             int fieldStationId = Integer.parseInt(request.params(":fieldStationId"));
