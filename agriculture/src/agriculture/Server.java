@@ -14,7 +14,6 @@ import java.util.List;
  */
 public class Server implements java.io.Serializable {
     private SetOfUsers setOfUsers;
-    private SetOfFieldStations setOfFieldStations;
     private SetOfFarms setOfFarms;
     
     private static Server serverInstance = null;
@@ -46,15 +45,7 @@ public class Server implements java.io.Serializable {
     public void setSetOfFarms(SetOfFarms setOfFarms) {
         this.setOfFarms = setOfFarms;
     }
-
-    public SetOfFieldStations getSetOfFieldStations() {
-        return setOfFieldStations;
-    }
-
-    public void setSetOfFieldStations(SetOfFieldStations setOfFieldStations) {
-        this.setOfFieldStations = setOfFieldStations;
-    }
-       
+     
     public User validateLogin(String username, String password) {
         User user = null;
         for(User u: setOfUsers) {
@@ -67,28 +58,44 @@ public class Server implements java.io.Serializable {
         return user;
     }
        
-    public boolean addFieldStation(double longitude, double latitude, String name) {
+    public boolean addField(double longitude, double latitude, String name) {
         Farm farm = setOfFarms.getFarmByName(name);
         if(farm != null) {
-            FieldStation fieldStation = new FieldStation(latitude, longitude, farm);
-            setOfFieldStations.add(fieldStation);
             
+            Location location = new Location(longitude, latitude);
+            Field field = new Field(location);
+
+            
+            SetOfFields fields = farm.getFields();
+            fields.add(field);            
             return true;
         }
         return false;
     }
     
-    public boolean addSensor(double longitude, double latitude, SensorType type) {
+    public boolean addSensor(Location location, SensorType type) {
         boolean result = false;
         
-        Location location = new Location(longitude, latitude);
-        FieldStation fieldStation = setOfFieldStations.getFieldStationByLocation(location);
-        if (fieldStation != null)
+        /* Find the farm that has a field with that location */
+        for (int farmCounter = 0; farmCounter < setOfFarms.size(); farmCounter++)
         {
-            fieldStation.addNewSensor(type);
-            result = true;
-        }
-        
+            Farm farm = setOfFarms.get(farmCounter);
+            SetOfFields fields = farm.getFields();
+            
+            for (int fieldCounter = 0; fieldCounter < fields.size(); fieldCounter++)
+            {
+                Field field = fields.get(fieldCounter);
+                
+                if (field.getLocation() == location)
+                {
+                    FieldStation station = field.getFieldStation();
+                    
+                    station.addNewSensor(type);
+                    result = true;
+                }
+            }
+                        
+        }           
         return result;
     }
 }

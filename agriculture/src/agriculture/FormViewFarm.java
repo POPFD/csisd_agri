@@ -38,15 +38,18 @@ public class FormViewFarm extends javax.swing.JPanel {
     
     public void setupFieldStationList() {
         
-        SetOfFieldStations fieldStations = server.getSetOfFieldStations();
-        SetOfFieldStations fieldStationsMatchingFarmName = fieldStations.getSetOfFieldStationsByName(farmSelected.getFarmName());
-
-        //this is looping through getting the integar values of the array to output to the JList
-        List list = new ArrayList<Integer>();
-        for(int i = 0; i < fieldStationsMatchingFarmName.size(); i++) {
-            list.add(fieldStationsMatchingFarmName.get(i).getFieldStationID());
-        }
+        SetOfFields fields = farmSelected.getFields();
         
+        /* Loops through all fields on a farm to get their field stations */        
+        List list = new ArrayList<Integer>();
+        for (int i = 0; i < fields.size(); i++)
+        {
+            Field field = fields.get(i);
+            FieldStation fieldStation = field.getFieldStation();
+                       
+            list.add(fieldStation.getFieldStationID());
+        }
+                
         fieldStationList.setListData(list.toArray());
     }
 
@@ -391,7 +394,10 @@ public class FormViewFarm extends javax.swing.JPanel {
         {
             int stationID = (int) fieldStationList.getSelectedValue();
 
-            FieldStation station = server.getSetOfFieldStations().getFieldStationByID(stationID);
+            SetOfFields fields = farmSelected.getFields();
+            Field field = fields.getFieldByID(stationID);
+                       
+            FieldStation station = field.getFieldStation();
 
             JFrame frame = new JFrame();
             FormFieldStation viewStation = new FormFieldStation(server, station, user, farmSelected, frame);              
@@ -431,7 +437,7 @@ public class FormViewFarm extends javax.swing.JPanel {
                 double longitude = Double.parseDouble(txtLongitude.getText());
                 double latitude = Double.parseDouble(txtLatitude.getText()); 
                 
-                if(server.addFieldStation(longitude, latitude, farmSelected.getFarmName())) {
+                if(server.addField(longitude, latitude, farmSelected.getFarmName())) {
                     txtLongitude.setText("");
                     txtLatitude.setText("");
                     setupFieldStationList();

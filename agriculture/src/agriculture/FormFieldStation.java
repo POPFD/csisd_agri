@@ -29,7 +29,7 @@ public class FormFieldStation extends javax.swing.JPanel {
         this.farmSelected = farmSelected;
         this.currentFrame = frame;
     
-        lblFarmName.setText(station.getFieldStationFarm().getFarmName());
+        lblFarmName.setText(farmSelected.getFarmName());
         lblFieldStationID.setText(Integer.toString(station.getFieldStationID()));      
     }
     

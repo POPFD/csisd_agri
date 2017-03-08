@@ -12,38 +12,31 @@ package agriculture;
 
 public class FieldStation implements java.io.Serializable {
     /* 
-    Changed fieldStationID to private and final
-    have also added a idCounter as an attribute for
-    the creation of a unique ID every time
-    */
+     * Changed fieldStationID to private and final
+     * have also added a idCounter as an attribute for
+     * the creation of a unique ID every time
+     */
     private static int idCounter = 0;
     private final int fieldStationID; 
     private SetOfSensorMonitors stationMonitors;
      
-    public Location fieldStationLocation;
-    public Farm farmLocatedIn;
+    public Location location;
 
   
-    public FieldStation(Double lat, Double lng, Farm farm){
+    public FieldStation(Location location){
         //Creating unique ID every time
         this.fieldStationID = idCounter;
         idCounter++;
         
-        this.fieldStationLocation = new Location(lat, lng);
-        this.farmLocatedIn = farm;
-        
+        this.location = location;
         this.stationMonitors = new SetOfSensorMonitors();
     }
-    
-    public void updateLocation(Location location){
-        this.fieldStationLocation = location;
-    }
-      
+         
     public void addNewSensor(SensorType type){
 
         /* Create new sensor and add to sensor monitor */
-        Sensor newSensor = new Sensor(fieldStationLocation.getLongitude(), 
-                                    fieldStationLocation.getLatitude(),
+        Sensor newSensor = new Sensor(location.getLongitude(), 
+                                    location.getLatitude(),
                                     type);
         
         /* For new frequency is static */
@@ -63,12 +56,7 @@ public class FieldStation implements java.io.Serializable {
     
     //ADDED GETTER FOR LOCATION
     public Location getFieldStationLocation(){
-        return this.fieldStationLocation;
+        return this.location;
     }
-    
-    //ADDED GETTER FOR NAME
-    public Farm getFieldStationFarm(){
-        return this.farmLocatedIn;
-    }
-    
+        
 }

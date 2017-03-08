@@ -26,4 +26,14 @@ public class SetOfFields extends ArrayList<Field>{
         super.remove(aField);
     }
     
+    public Field getFieldByID(int id){
+        Field field = null;
+        for(Field s: this) {
+            if(s.getID() == id){
+                field = s;
+            }
+        }
+        return field;
+    }
+    
 }

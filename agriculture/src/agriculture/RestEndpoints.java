@@ -45,13 +45,15 @@ public class RestEndpoints {
             Farm farm = server.getSetOfFarms().getFarmByName(request.params(":farmName"));
 
             if (farm != null) {
-                SetOfFieldStations fieldStationsMatchingFarmName = server.getSetOfFieldStations().getSetOfFieldStationsByName(farm.getFarmName());
-
+                SetOfFields fields = farm.getFields();
+                
                 List<String> fieldStations = new ArrayList<String>();
-                for (FieldStation fieldStation : fieldStationsMatchingFarmName) {
+                for (Field field: fields) {
+                    FieldStation station = field.getFieldStation();
+                    
                     JsonObject jsonObj = new JsonObject();
-                    jsonObj.addProperty("fieldStationID", fieldStation.getFieldStationID());                   
-                    fieldStations.add(jsonObj.toString());
+                    jsonObj.addProperty("fieldStationID", station.getFieldStationID());                   
+                    fieldStations.add(jsonObj.toString());    
                 }
                 return fieldStations;
             }
@@ -67,18 +69,23 @@ public class RestEndpoints {
         get("/sensorMonitor/:fieldStationId", (request, response) -> {
             response.header("Access-Control-Allow-Origin", "*");
             int fieldStationId = Integer.parseInt(request.params(":fieldStationId"));
-
-            FieldStation fieldStation = server.getSetOfFieldStations().getFieldStationByID(Integer.parseInt(request.params(":fieldStationId")));
-
-            if (fieldStation != null) {
-
-                List<String> sensorMonitors = new ArrayList<String>();
-                for (SensorMonitor sensorMonitor : fieldStation.getSensorMonitors()) {
+            
+            SetOfFarms farms = server.getSetOfFarms();
+            for (Farm farm: farms)
+            {
+                SetOfFields fields = farm.getFields();
+                Field field = fields.getFieldByID(Integer.parseInt(request.params(":fieldStationId")));
+                
+                FieldStation station = field.getFieldStation();
+                
+                List<String> monitorList = new ArrayList<String>();
+                for (SensorMonitor monitor: station.getSensorMonitors()) 
+                {
                     JsonObject jsonObj = new JsonObject();
-                    jsonObj.addProperty("sensorMonitorID", sensorMonitor.getID());
-                    sensorMonitors.add(jsonObj.toString());
+                    jsonObj.addProperty("sensorMonitorID", monitor.getID());
+                    monitorList.add(jsonObj.toString());      
                 }
-                return sensorMonitors;
+                return monitorList;
             }
 
             response.status(400);

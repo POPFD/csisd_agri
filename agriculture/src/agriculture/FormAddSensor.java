@@ -29,7 +29,7 @@ public class FormAddSensor extends javax.swing.JPanel {
         this.farmSelected = farmSelected;
         this.frame = frame;
 
-        lblFarmName1.setText(station.getFieldStationFarm().getFarmName());
+        lblFarmName1.setText(farmSelected.getFarmName());
         lblFieldStationName1.setText(Integer.toString(station.getFieldStationID()));
         lblFieldStationID1.setText(Integer.toString(station.getFieldStationID()));
     }

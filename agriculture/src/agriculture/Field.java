@@ -15,10 +15,25 @@ public class Field {
     
     private final int fieldID;
     private SetOfPlots plots = new SetOfPlots();
+    private FieldStation fieldStation = null;
+    private Location location;
     
-    public Field(){
+    public Field(Location loc){
         fieldID = idCounter;
         idCounter++;
+        
+        this.location = loc;
+        fieldStation = new FieldStation(loc);
+    }
+    
+    public Location getLocation()
+    {
+        return location;
+    }
+    
+    public FieldStation getFieldStation()
+    {
+        return fieldStation;
     }
     
     public SetOfPlots getPlots(){

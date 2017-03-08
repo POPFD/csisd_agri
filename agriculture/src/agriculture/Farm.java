@@ -21,9 +21,11 @@ public class Farm implements java.io.Serializable {
    public Farm(String farmName, String farmAddress, User farmOwner) {
        this.farmID = idCounter;
        idCounter++;
+       
        this.farmName = farmName;
        this.farmAddress = farmAddress;
        this.farmOwner = farmOwner;
+       this.fields = new SetOfFields();
    }
    
    public void setFields(SetOfFields fields) {
