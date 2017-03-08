@@ -14,12 +14,17 @@ import javax.swing.JOptionPane;
  */
 public class FormAddSensor extends javax.swing.JPanel {
     private final Server server;
-    private  FieldStation station;
+    private final FieldStation station;
     private final User user;
     private final Farm farmSelected;
     private final JFrame frame;
     /**
      * Creates new form AddSensorForm
+     * @param server
+     * @param station
+     * @param farmSelected
+     * @param user
+     * @param frame
      */
     public FormAddSensor(Server server, FieldStation station, User user, Farm farmSelected, JFrame frame) {
         initComponents();
@@ -29,6 +34,7 @@ public class FormAddSensor extends javax.swing.JPanel {
         this.farmSelected = farmSelected;
         this.frame = frame;
 
+        //initialise form elements
         lblFarmName1.setText(station.getFieldStationFarm().getFarmName());
         lblFieldStationName1.setText(Integer.toString(station.getFieldStationID()));
         lblFieldStationID1.setText(Integer.toString(station.getFieldStationID()));
@@ -216,23 +222,25 @@ public class FormAddSensor extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        /* Pressing this button allows the user
+        to add a new sesnsor to the fieldstation */
         
         //go through users' farm access
-            SetOfFarmAccess permissions = user.getPermissions();
-            for(FarmAccess access : permissions) {
-                if(access.getFarm() == farmSelected) {
-                    //check they have read and write access
-                    if(access.getAccessLevel() == AccessLevel.ReadWrite) {
-                        System.out.println("Allowed to edit");
-                    } else {
-                        System.out.println("Not allowed to edit");
-                        JOptionPane.showMessageDialog(null, "You do not have permission to edit this farm.");
-                        return;
-                    }
+        SetOfFarmAccess permissions = user.getPermissions();
+        for(FarmAccess access : permissions) {
+            if(access.getFarm() == farmSelected) {
+                //check they have read and write access
+                if(access.getAccessLevel() == AccessLevel.ReadWrite) {
+                    System.out.println("Allowed to edit");
+                } else {
+                    System.out.println("Not allowed to edit");
+                    JOptionPane.showMessageDialog(null, "You do not have permission to edit this farm.");
+                    return; //no access, exit out of function
                 }
             }
+        }
 
-        
+        //add sensor to station
         switch (cBoxType.getSelectedItem().toString())
         {
             case "RAINFALL":
@@ -255,7 +263,7 @@ public class FormAddSensor extends javax.swing.JPanel {
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        // TODO add your handling code here:
+        //closes window on back button press
         frame.dispose();
     }//GEN-LAST:event_btnBackActionPerformed
 

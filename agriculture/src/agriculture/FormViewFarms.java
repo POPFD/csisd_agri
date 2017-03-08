@@ -22,6 +22,8 @@ public class FormViewFarms extends javax.swing.JPanel {
      * Creates new form FieldStationForm
      * 
      * @param server
+     * @param user
+     * @param frame
      */
     public FormViewFarms(Server server, User user, JFrame frame) {
         initComponents();
@@ -29,11 +31,12 @@ public class FormViewFarms extends javax.swing.JPanel {
         this.user = user;
         this.currentFrame = frame;
         
+        //initialise form elements
         setFarmListBox();
     }
     
     public void setFarmListBox() {
-        
+        //sets up farms to view based on used permissions
         SetOfFarmAccess permissions = user.getPermissions();
         
         List list = new ArrayList<String>();
@@ -184,7 +187,8 @@ public class FormViewFarms extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void farmViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_farmViewActionPerformed
-        // TODO add your handling code her
+        /* This function launches view field stations form
+        from the farm selected */
         String farmSelected = (String) farmList.getSelectedValue();
         if(farmSelected == null){
             errorLbl.setText("Please select a farm from the list");
@@ -192,6 +196,7 @@ public class FormViewFarms extends javax.swing.JPanel {
             errorLbl.setText("");
             Farm farm = server.getSetOfFarms().getFarmByName(farmSelected);
             
+            //launch view fieldstations form
             JFrame frame = new JFrame();
             FormViewFarm viewFarm = new FormViewFarm(server, user, farm, frame);
             frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -202,7 +207,7 @@ public class FormViewFarms extends javax.swing.JPanel {
     }//GEN-LAST:event_farmViewActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
-        //to implement
+        //closes current form and launches login form again
         currentFrame.dispose();
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {

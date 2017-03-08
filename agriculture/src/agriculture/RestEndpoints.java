@@ -27,6 +27,7 @@ public class RestEndpoints {
         
         //get list of farms
         get("/farms", (request, response) -> {
+            response.type("application/json");
             response.header("Access-Control-Allow-Origin", "*");
             List<String> farms = new ArrayList<String>();
             for (Farm f : server.getSetOfFarms()) {
@@ -41,14 +42,15 @@ public class RestEndpoints {
 
         //get list of field stations for a farm
         get("/fieldStation/:farmName", (request, response) -> {
+            response.type("application/json");
             response.header("Access-Control-Allow-Origin", "*");
             Farm farm = server.getSetOfFarms().getFarmByName(request.params(":farmName"));
 
-            if (farm != null) {
-                SetOfFieldStations fieldStationsMatchingFarmName = server.getSetOfFieldStations().getSetOfFieldStationsByName(farm.getFarmName());
+            if(farm != null) {
+                SetOfFieldStations farmFieldStations = server.getSetOfFieldStations().getSetOfFieldStationsByName(farm.getFarmName());
 
                 List<String> fieldStations = new ArrayList<String>();
-                for (FieldStation fieldStation : fieldStationsMatchingFarmName) {
+                for (FieldStation fieldStation : farmFieldStations) {
                     JsonObject jsonObj = new JsonObject();
                     jsonObj.addProperty("fieldStationID", fieldStation.getFieldStationID());                   
                     fieldStations.add(jsonObj.toString());
@@ -65,6 +67,7 @@ public class RestEndpoints {
 
         //get list of sensor monitors for a fieldstation
         get("/sensorMonitor/:fieldStationId", (request, response) -> {
+            response.type("application/json");
             response.header("Access-Control-Allow-Origin", "*");
             int fieldStationId = Integer.parseInt(request.params(":fieldStationId"));
 
@@ -90,6 +93,7 @@ public class RestEndpoints {
 
         //get readings for a sensor monitor
         get("/readings/:fieldStationId", (request, response) -> {
+            response.type("application/json");
             response.header("Access-Control-Allow-Origin", "*");
             int fieldStationId = Integer.parseInt(request.params(":fieldStationId"));
 
