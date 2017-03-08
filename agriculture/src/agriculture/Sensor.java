@@ -69,6 +69,11 @@ public class Sensor extends Observable implements java.io.Serializable {
         sensorLocation = newLocation;
     }
     
+    public Location getLocation()
+    {
+        return sensorLocation;
+    }
+    
     public void initiateReading() {     
         Date currDT = new Date();    
                         
