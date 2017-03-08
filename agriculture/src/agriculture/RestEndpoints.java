@@ -69,7 +69,16 @@ public class RestEndpoints {
         get("/sensorMonitors/:fieldStationId", (request, response) -> {
             response.type("application/json");
             response.header("Access-Control-Allow-Origin", "*");
-            int fieldStationId = Integer.parseInt(request.params(":fieldStationId"));
+            
+            int fieldStationId;
+            try {
+                fieldStationId = Integer.parseInt(request.params(":fieldStationId"));
+            } catch(Exception e) {
+                response.status(400);
+                JsonObject jsonObj = new JsonObject();
+                jsonObj.addProperty("message", "Fieldstation ID is not a number");
+                return jsonObj;
+            }            
 
             FieldStation fieldStation = server.getSetOfFieldStations().getFieldStationByID(Integer.parseInt(request.params(":fieldStationId")));
 
@@ -95,8 +104,17 @@ public class RestEndpoints {
         get("/readings/:fieldStationId", (request, response) -> {
             response.type("application/json");
             response.header("Access-Control-Allow-Origin", "*");
-            int fieldStationId = Integer.parseInt(request.params(":fieldStationId"));
-
+            
+            int fieldStationId;
+            try {
+                fieldStationId = Integer.parseInt(request.params(":fieldStationId"));
+            } catch(Exception e) {
+                response.status(400);
+                JsonObject jsonObj = new JsonObject();
+                jsonObj.addProperty("message", "Fieldstation ID is not a number");
+                return jsonObj;
+            }
+            
             FieldStation fieldStation = server.getSetOfFieldStations().getFieldStationByID(fieldStationId);
             if (fieldStation != null) {
                 SetOfSensorMonitors setOfSensorMonitors = fieldStation.getSensorMonitors();
