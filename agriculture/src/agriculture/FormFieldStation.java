@@ -12,7 +12,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author SaneetBhella
  */
-public class FormFieldStation extends javax.swing.JPanel implements Observer {
+public class FormFieldStation extends javax.swing.JPanel {
     private final Server server;
     private  FieldStation station;
     private final User user;
@@ -30,9 +30,9 @@ public class FormFieldStation extends javax.swing.JPanel implements Observer {
         this.currentFrame = frame;
     
         lblFarmName.setText(station.getFieldStationFarm().getFarmName());
-        lblFieldStationID.setText(Integer.toString(station.getFieldStationID()));
+        lblFieldStationID.setText(Integer.toString(station.getFieldStationID()));      
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -237,16 +237,33 @@ public class FormFieldStation extends javax.swing.JPanel implements Observer {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         
         /* Clear existing items from model */
-        if (model.getRowCount() > 0)
-        {
-            for (int i = model.getRowCount() - 1; i > -1; i--)
-            {
-                model.removeRow(i);
-            }
-        }
-                
-        for(int i = 0; i < station.getSensorMonitors().size(); ++i){
-            station.getSensorMonitors().get(i).getSensor().initiateReading();
+        model.setRowCount(0);
+              
+        for(int i = 0; i < station.getSensorMonitors().size(); ++i) {
+            
+            SensorMonitor sensMon = station.getSensorMonitors().get(i);
+            Sensor sensor = sensMon.getSensor();
+            
+            /* 
+             * As sensors are not running updating at different 
+             * times we have to initiate a reading manually.
+             */
+            sensor.initiateReading();
+            
+            Reading lastReading = sensMon.getLastReading();
+            
+            /* Check to make sure there are actually readings there */
+            if (lastReading != null)
+            {                
+                model.addRow(new Object[]{
+                    sensor.getID(),
+                    sensor.getType(),
+                    lastReading.getReadingLocation().getLatitude(),
+                    lastReading.getReadingLocation().getLongitude(),
+                    lastReading.getReadingValue(),
+                    lastReading.getReadingTime()
+                });
+            }  
         } 
     }//GEN-LAST:event_btnViewSensorsActionPerformed
 
@@ -284,18 +301,5 @@ public class FormFieldStation extends javax.swing.JPanel implements Observer {
     private javax.swing.JLabel lblFieldStationID;
     private javax.swing.JLabel lblFieldStationID1;
     // End of variables declaration//GEN-END:variables
-
-    @Override
-    public void update(Sensor sensor) {
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        
-        model.addRow(new Object[]{
-            sensor.getID(),
-            sensor.getType(),
-            sensor.getReading().getReadingLocation().getLatitude(),
-            sensor.getReading().getReadingLocation().getLongitude(),
-            sensor.getReading().getReadingValue(),
-            sensor.getReading().getReadingTime()
-        });
-    }
+  
 }

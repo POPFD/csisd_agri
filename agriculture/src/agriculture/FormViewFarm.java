@@ -399,7 +399,6 @@ public class FormViewFarm extends javax.swing.JPanel {
             frame.getContentPane().add(viewStation);
             frame.pack();
             frame.setVisible(true);
-            Server.getInstance().addObserver(viewStation);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
