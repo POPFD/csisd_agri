@@ -15,7 +15,7 @@ public class Farm implements java.io.Serializable {
    private String farmName;
    private String farmAddress;
    
-   private SetOfFarms fields;
+   private SetOfFields fields;
    private User farmOwner;
    
    public Farm(String farmName, String farmAddress, User farmOwner) {
@@ -26,11 +26,11 @@ public class Farm implements java.io.Serializable {
        this.farmOwner = farmOwner;
    }
    
-   public void setFields(SetOfFarms fields) {
+   public void setFields(SetOfFields fields) {
        this.fields = fields;
    }
    
-   public SetOfFarms getFields() {
+   public SetOfFields getFields() {
        return fields;
    }
 
