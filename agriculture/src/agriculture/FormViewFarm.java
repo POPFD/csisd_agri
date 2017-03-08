@@ -21,6 +21,10 @@ public class FormViewFarm extends javax.swing.JPanel {
     private final User user;
     /**
      * Creates new form viewFarmPage
+     * @param server
+     * @param user
+     * @param farmSelected
+     * @param frame
      */
     public FormViewFarm(Server server, User user, Farm farmSelected, JFrame frame) {
         initComponents();
@@ -29,24 +33,27 @@ public class FormViewFarm extends javax.swing.JPanel {
         this.currentFrame = frame;
         this.user = user;
 
+        //setup form elements
         setupFieldStationList();
-        
         farmNameLabel.setText(farmSelected.getFarmName());
         farmOwnerLabel.setText(farmSelected.getFarmOwner().getName());
         farmAddressLabel.setText(farmSelected.getFarmAddress());
     }
     
     public void setupFieldStationList() {
+        /* This function sets up the fieldstation list */
         
+        //get field stations for the farm selected
         SetOfFieldStations fieldStations = server.getSetOfFieldStations();
         SetOfFieldStations fieldStationsMatchingFarmName = fieldStations.getSetOfFieldStationsByName(farmSelected.getFarmName());
 
-        //this is looping through getting the integar values of the array to output to the JList
+        //get the field station ID's
         List list = new ArrayList<Integer>();
         for(int i = 0; i < fieldStationsMatchingFarmName.size(); i++) {
             list.add(fieldStationsMatchingFarmName.get(i).getFieldStationID());
         }
         
+        //add field station ID's to the list
         fieldStationList.setListData(list.toArray());
     }
 
@@ -386,7 +393,7 @@ public class FormViewFarm extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+        /* This function launches view fieldstation form */
         if (fieldStationList.getSelectedIndex() != -1)
         {
             int stationID = (int) fieldStationList.getSelectedValue();
@@ -403,12 +410,12 @@ public class FormViewFarm extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        // TODO add your handling code here:
+        //closes window on back button press
         currentFrame.dispose();
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnAddStationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddStationActionPerformed
-        // TODO add your handling code here:
+        /* This function adds a new field station to the farm */
         
         if(!txtLongitude.getText().equals("") && !txtLatitude.getText().equals("")) {
             
@@ -422,15 +429,17 @@ public class FormViewFarm extends javax.swing.JPanel {
                     } else {
                         System.out.println("Not allowed to edit");
                         JOptionPane.showMessageDialog(null, "You do not have permission to edit this farm.");
-                        return;
+                        return; //no access, exit out of function
                     }
                 }
             }
             
+            //validation so we get proper inputs required to save fieldstation
             try {
                 double longitude = Double.parseDouble(txtLongitude.getText());
                 double latitude = Double.parseDouble(txtLatitude.getText()); 
                 
+                //add fieldstation and add re-populate list
                 if(server.addFieldStation(longitude, latitude, farmSelected.getFarmName())) {
                     txtLongitude.setText("");
                     txtLatitude.setText("");

@@ -14,12 +14,17 @@ import javax.swing.table.DefaultTableModel;
  */
 public class FormFieldStation extends javax.swing.JPanel {
     private final Server server;
-    private  FieldStation station;
+    private final FieldStation station;
     private final User user;
     private final Farm farmSelected;
     private JFrame currentFrame;
     /**
      * Creates new form FieldStationForm
+     * @param server
+     * @param station
+     * @param user
+     * @param farmSelected
+     * @param frame
      */
     public FormFieldStation(Server server, FieldStation station, User user, Farm farmSelected, JFrame frame) {
         initComponents();
@@ -29,6 +34,7 @@ public class FormFieldStation extends javax.swing.JPanel {
         this.farmSelected = farmSelected;
         this.currentFrame = frame;
     
+        //initialse form elements
         lblFarmName.setText(station.getFieldStationFarm().getFarmName());
         lblFieldStationID.setText(Integer.toString(station.getFieldStationID()));      
     }
@@ -233,7 +239,8 @@ public class FormFieldStation extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnViewSensorsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewSensorsActionPerformed
-
+        /* This function gets readings for sensors */
+        
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         
         /* Clear existing items from model */
@@ -268,6 +275,7 @@ public class FormFieldStation extends javax.swing.JPanel {
     }//GEN-LAST:event_btnViewSensorsActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        //this function launches add new sensor form
         JFrame frame = new JFrame();
         FormAddSensor addSensor = new FormAddSensor(server, station, user, farmSelected, frame);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -277,7 +285,7 @@ public class FormFieldStation extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        // TODO add your handling code here:
+        //closes window on back button press
         currentFrame.dispose();
     }//GEN-LAST:event_btnBackActionPerformed
 
